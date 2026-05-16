@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Award, Briefcase, Target, ChevronRight,
-  Bell, Sparkles, Clock, Star, Zap, TrendingUp, BookOpen
+  Bell, Sparkles, Star, TrendingUp, BookOpen
 } from 'lucide-react';
-import { MatchBadge } from '../../components/ui/MatchBadge';
 
 const Dashboard: React.FC = () => {
   return (
