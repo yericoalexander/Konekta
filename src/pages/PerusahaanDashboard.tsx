@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { 
+import {
   Home, Briefcase, Users, Calendar, BarChart2, Settings,
   CheckCircle2, MoreVertical, Video, Send
 } from 'lucide-react';
@@ -8,29 +8,29 @@ export default function PerusahaanDashboard() {
   return (
     <div className="flex bg-gray min-h-screen">
       {/* Sidebar */}
-      <aside style={{ 
-        width: '280px', 
-        minWidth: '280px', 
-        background: 'var(--navy)', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        height: '100vh', 
-        position: 'sticky', 
-        top: 0, 
+      <aside style={{
+        width: '280px',
+        minWidth: '280px',
+        background: 'var(--navy)',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        position: 'sticky',
+        top: 0,
         overflowY: 'auto',
         borderRight: '1px solid rgba(255,255,255,0.05)'
       }}>
         {/* Company Logo Section */}
         <div style={{ padding: '32px 24px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ 
-            width: '40px', 
-            height: '40px', 
-            background: 'var(--blue)', 
-            borderRadius: '12px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            fontWeight: '800', 
+          <div style={{
+            width: '40px',
+            height: '40px',
+            background: 'var(--blue)',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontWeight: '800',
             color: '#fff',
             boxShadow: '0 8px 16px rgba(37,99,235,0.3)'
           }}>MB</div>
@@ -43,24 +43,24 @@ export default function PerusahaanDashboard() {
         {/* Navigation Menu */}
         <nav style={{ flex: 1, padding: '24px 16px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
           {[
-            { icon: <Home size={20}/>, label: 'Overview', active: true },
-            { icon: <Briefcase size={20}/>, label: 'Lowongan Aktif' },
-            { icon: <Users size={20}/>, label: 'Kandidat' },
-            { icon: <Calendar size={20}/>, label: 'Interview' },
-            { icon: <BarChart2 size={20}/>, label: 'Laporan' },
-            { icon: <Settings size={20}/>, label: 'Pengaturan' },
+            { icon: <Home size={20} />, label: 'Overview', active: true },
+            { icon: <Briefcase size={20} />, label: 'Lowongan Aktif' },
+            { icon: <Users size={20} />, label: 'Kandidat' },
+            { icon: <Calendar size={20} />, label: 'Interview' },
+            { icon: <BarChart2 size={20} />, label: 'Laporan' },
+            { icon: <Settings size={20} />, label: 'Pengaturan' },
           ].map(({ icon, label, active }) => (
             <a key={label} href="#" style={{
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '12px', 
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
               padding: '12px 16px',
-              borderRadius: '12px', 
-              fontSize: '0.95rem', 
+              borderRadius: '12px',
+              fontSize: '0.95rem',
               fontWeight: active ? '600' : '500',
               color: active ? '#fff' : 'rgba(255,255,255,0.5)',
               background: active ? 'linear-gradient(135deg, var(--blue) 0%, #1d4ed8 100%)' : 'transparent',
-              textDecoration: 'none', 
+              textDecoration: 'none',
               transition: 'all 0.2s ease',
               boxShadow: active ? '0 4px 12px rgba(37,99,235,0.25)' : 'none'
             }}>
@@ -71,10 +71,10 @@ export default function PerusahaanDashboard() {
         </nav>
 
         {/* Plan Summary */}
-        <div style={{ 
+        <div style={{
           margin: '16px',
-          padding: '20px', 
-          background: 'rgba(255,255,255,0.03)', 
+          padding: '20px',
+          background: 'rgba(255,255,255,0.03)',
           borderRadius: '20px',
           border: '1px solid rgba(255,255,255,0.05)'
         }}>
@@ -166,7 +166,7 @@ export default function PerusahaanDashboard() {
               <h2 className="text-lg font-bold">Shortlist Terbaru — Staff QC</h2>
               <span className="badge badge-blue text-xs">12 Tersedia</span>
             </div>
-            
+
             <div className="space-y-4">
               {[
                 { name: 'Raka D.', school: 'SMK Mesin', match: '87%', lgk: '88%', bhs: '76%' },
@@ -175,9 +175,9 @@ export default function PerusahaanDashboard() {
                 <div key={i} className="card p-4">
                   <div className="flex justify-between items-center mb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-blue-light text-blue flex items-center justify-center font-bold text-sm">{k.name.substring(0,2)}</div>
+                      <div className="w-10 h-10 rounded-full bg-blue-light text-blue flex items-center justify-center font-bold text-sm">{k.name.substring(0, 2)}</div>
                       <div>
-                        <h4 className="font-bold flex items-center gap-1">{k.name} <CheckCircle2 size={14} className="text-teal"/></h4>
+                        <h4 className="font-bold flex items-center gap-1">{k.name} <CheckCircle2 size={14} className="text-teal" /></h4>
                         <p className="text-xs text-gray">{k.school}</p>
                       </div>
                     </div>
@@ -186,11 +186,11 @@ export default function PerusahaanDashboard() {
                   <div className="flex gap-4 mb-4">
                     <div className="flex-1">
                       <p className="text-xs text-gray mb-1">Logika</p>
-                      <div className="progress-wrap h-1.5"><div className="progress-bar bg-blue" style={{width: k.lgk}}></div></div>
+                      <div className="progress-wrap h-1.5"><div className="progress-bar bg-blue" style={{ width: k.lgk }}></div></div>
                     </div>
                     <div className="flex-1">
                       <p className="text-xs text-gray mb-1">Bahasa</p>
-                      <div className="progress-wrap h-1.5"><div className="progress-bar bg-teal" style={{width: k.bhs}}></div></div>
+                      <div className="progress-wrap h-1.5"><div className="progress-bar bg-teal" style={{ width: k.bhs }}></div></div>
                     </div>
                   </div>
                   <div className="flex gap-2">
@@ -212,11 +212,11 @@ export default function PerusahaanDashboard() {
                 </div>
                 <div className="flex-1">
                   <h4 className="font-bold">Raka D. — Staff QC</h4>
-                  <p className="text-sm text-gray flex items-center gap-1"><Video size={14}/> Video Call • 10.00 WIB</p>
+                  <p className="text-sm text-gray flex items-center gap-1"><Video size={14} /> Video Call • 10.00 WIB</p>
                 </div>
                 <MoreVertical className="text-gray" />
               </div>
-              
+
               <div className="p-4 flex items-center gap-4 hover:bg-gray transition">
                 <div className="w-12 h-12 bg-purple-light rounded flex flex-col items-center justify-center text-purple">
                   <span className="text-xs font-bold uppercase">Mei</span>
@@ -224,30 +224,30 @@ export default function PerusahaanDashboard() {
                 </div>
                 <div className="flex-1">
                   <h4 className="font-bold">Sari W. — Staff QC</h4>
-                  <p className="text-sm text-gray flex items-center gap-1"><Video size={14}/> Video Call • 14.00 WIB</p>
+                  <p className="text-sm text-gray flex items-center gap-1"><Video size={14} /> Video Call • 14.00 WIB</p>
                 </div>
                 <MoreVertical className="text-gray" />
               </div>
-              
+
               <div className="p-4 border-t bg-gray flex gap-2">
-                <button className="btn btn-solid-blue py-2 flex-1 flex items-center justify-center gap-2"><Video size={16}/> Buka G-Meet</button>
-                <button className="btn btn-outline-blue py-2 flex-1 flex items-center justify-center gap-2"><Send size={16}/> Kirim Notif</button>
+                <button className="btn btn-solid-blue py-2 flex-1 flex items-center justify-center gap-2"><Video size={16} /> Buka G-Meet</button>
+                <button className="btn btn-outline-blue py-2 flex-1 flex items-center justify-center gap-2"><Send size={16} /> Kirim Notif</button>
               </div>
             </div>
-            
+
             <div className="card mt-6 p-4  accent-l-blue">
               <div className="flex justify-between items-center mb-2">
                 <h4 className="font-bold text-sm">Akurasi Matching per Bulan</h4>
-                <BarChart2 size={16} className="text-blue"/>
+                <BarChart2 size={16} className="text-blue" />
               </div>
               <p className="text-xs text-gray mb-2">Grafik meningkat 7% setelah 3 feedback terakhir. AI semakin memahami kultur perusahaan Anda.</p>
               {/* Fake mini chart */}
               <div className="flex items-end gap-1 h-12 mt-2">
-                <div className="w-full bg-blue-light rounded-t" style={{height: '40%'}}></div>
-                <div className="w-full bg-blue-light rounded-t" style={{height: '50%'}}></div>
-                <div className="w-full bg-blue-light rounded-t" style={{height: '55%'}}></div>
-                <div className="w-full bg-blue-light rounded-t" style={{height: '70%'}}></div>
-                <div className="w-full bg-blue rounded-t" style={{height: '89%'}}></div>
+                <div className="w-full bg-blue-light rounded-t" style={{ height: '40%' }}></div>
+                <div className="w-full bg-blue-light rounded-t" style={{ height: '50%' }}></div>
+                <div className="w-full bg-blue-light rounded-t" style={{ height: '55%' }}></div>
+                <div className="w-full bg-blue-light rounded-t" style={{ height: '70%' }}></div>
+                <div className="w-full bg-blue rounded-t" style={{ height: '89%' }}></div>
               </div>
             </div>
           </div>

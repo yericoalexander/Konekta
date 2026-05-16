@@ -38,7 +38,7 @@ const Navbar = () => (
         <a href="#harga" className="font-medium text-gray hover:text-blue">Harga</a>
       </div>
       <div className="flex gap-4 hidden-mobile">
-        <Link to="/kandidat/dashboard" className="btn btn-outline-blue">Masuk</Link>
+        <Link to="/login" className="btn btn-outline-blue">Masuk</Link>
         <Link to="/assessment" className="btn btn-solid-blue">Daftar Gratis</Link>
       </div>
       <Menu size={24} className="text-navy" style={{ display: 'none' }} id="mobile-menu-btn" />
@@ -309,7 +309,7 @@ const FiturUtama = () => {
   ];
 
   return (
-    <section className="section" style={{ background: '#fff', padding: '100px 0' }}>
+    <section id="fitur" className="section" style={{ background: '#fff', padding: '100px 0' }}>
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
           <div className="badge badge-blue" style={{ marginBottom: '16px' }}>Kenapa Konekta?</div>
