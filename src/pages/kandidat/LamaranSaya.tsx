@@ -39,21 +39,37 @@ const LamaranSaya: React.FC = () => {
       </div>
 
       {/* [2] FILTER TABS */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
-        <div className="flex bg-gray-100 p-1.5 rounded-[20px] shadow-inner">
-          {['Semua', 'Diproses', 'Interview', 'Ditolak', 'Diterima'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2.5 rounded-2xl text-xs font-black transition-all ${activeTab === tab ? 'bg-white text-blue-600 shadow-md' : 'text-gray-500 hover:text-gray-700'}`}
-            >
-              {tab}
-            </button>
-          ))}
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 gap-6 w-full">
+        {/* Scrollable container for tabs */}
+        <div className="w-full lg:w-auto overflow-x-auto hide-scrollbar pb-1 -mb-1">
+          <div className="inline-flex bg-slate-50 border border-slate-100 p-1.5 rounded-[20px] shadow-inner">
+            {['Semua', 'Diproses', 'Interview', 'Ditolak', 'Diterima'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-6 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                  activeTab === tab 
+                    ? 'bg-white text-blue-600 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100/50' 
+                    : 'text-slate-400 hover:text-navy hover:bg-slate-100/50'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="relative w-full md:w-64">
-          <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input type="text" className="w-full bg-white border border-gray-100 rounded-2xl pl-10 pr-4 py-2.5 text-xs font-medium focus:ring-2 focus:ring-blue-500/10 outline-none shadow-sm" placeholder="Cari lamaran..." />
+        
+        {/* Search Bar */}
+        <div className="relative w-full lg:w-80 shrink-0">
+          <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none text-slate-400" style={{ paddingLeft: '16px' }}>
+            <Search size={18} />
+          </div>
+          <input 
+            type="text" 
+            className="w-full bg-white border-2 border-transparent rounded-[20px] pr-5 py-3.5 text-sm font-bold text-navy placeholder:text-slate-300 focus:bg-white outline-none transition-all duration-300 focus:border-slate-200 shadow-sm" 
+            style={{ paddingLeft: '48px' }}
+            placeholder="Cari lamaran..." 
+          />
         </div>
       </div>
 

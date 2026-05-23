@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  BrainCircuit, CheckCircle2, ChevronDown, ChevronUp,
-  Award, Menu,
+  BrainCircuit, CheckCircle2, ChevronDown,
+  Award,
   Building, ArrowRight, ClipboardList, Target, Send, Mic, LineChart,
-  Settings, Filter, FileCheck, Video, Lightbulb,
-  RefreshCcw
+  Settings, Filter, FileCheck, Video,
+  RefreshCcw, Sparkles, Zap, ShieldCheck
 } from 'lucide-react';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Navbar />
       <Hero />
+      <Logos />
       <CaraKerjaKandidat />
       <CaraKerjaPerusahaan />
       <FiturUtama />
@@ -25,460 +26,342 @@ export default function LandingPage() {
 }
 
 const Navbar = () => (
-  <nav className="bg-white" style={{ borderBottom: '1px solid var(--gray-border)', position: 'sticky', top: 0, zIndex: 50 }}>
-    <div className="container flex justify-between items-center" style={{ height: '72px' }}>
-      <div className="flex items-center gap-2">
-        <BrainCircuit size={28} className="text-blue" />
-        <span className="font-bold text-xl text-navy">Konekta</span>
+  <nav className="fixed top-0 left-0 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-slate-100 shadow-sm">
+    <div className="container mx-auto px-6 h-20 flex justify-between items-center">
+      <Link to="/" className="flex items-center gap-3 group">
+        <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 transform group-hover:rotate-6 transition-transform">
+          <BrainCircuit size={24} className="text-white" />
+        </div>
+        <span className="font-extrabold text-2xl text-navy tracking-tighter">Konekta</span>
+      </Link>
+      
+      <div className="hidden lg:flex gap-10">
+        {['Kandidat', 'Perusahaan', 'Cara Kerja', 'Harga'].map(item => (
+          <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-sm font-extrabold text-slate-400 hover:text-blue-600 transition-colors uppercase tracking-widest">
+            {item}
+          </a>
+        ))}
       </div>
-      <div className="flex gap-6 hidden-mobile">
-        <a href="#kandidat" className="font-medium text-gray hover:text-blue">Untuk Kandidat</a>
-        <a href="#perusahaan" className="font-medium text-gray hover:text-blue">Untuk Perusahaan</a>
-        <a href="#fitur" className="font-medium text-gray hover:text-blue">Cara Kerja</a>
-        <a href="#harga" className="font-medium text-gray hover:text-blue">Harga</a>
+      
+      <div className="flex gap-4 items-center">
+        <Link to="/login" className="text-sm font-extrabold text-navy px-6 py-3 hover:text-blue-600 transition-colors uppercase tracking-widest">Masuk</Link>
+        <Link to="/assessment" className="px-8 py-3.5 bg-blue-600 text-white rounded-2xl text-sm font-extrabold shadow-xl shadow-blue-600/20 hover:bg-blue-700 hover:-translate-y-1 transition-all active:translate-y-0 uppercase tracking-widest">
+          Daftar Gratis
+        </Link>
       </div>
-      <div className="flex gap-4 hidden-mobile">
-        <Link to="/login" className="btn btn-outline-blue">Masuk</Link>
-        <Link to="/assessment" className="btn btn-solid-blue">Daftar Gratis</Link>
-      </div>
-      <Menu size={24} className="text-navy" style={{ display: 'none' }} id="mobile-menu-btn" />
     </div>
   </nav>
 );
 
 const Hero = () => (
-  <section className="section bg-white" style={{ overflow: 'hidden' }}>
-    <div className="container grid grid-cols-2 items-center gap-12 hero-content">
-      <div style={{ flex: '0 0 55%' }}>
-        <div className="badge badge-blue mb-4">
-          <BrainCircuit size={16} /> Didukung AI Terkini
+  <section className="pt-40 pb-32 overflow-hidden relative">
+    <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px] -mr-96 -mt-96 animate-pulse-slow"></div>
+    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-[100px] -ml-64 -mb-64"></div>
+    
+    <div className="container mx-auto px-6 grid lg:grid-cols-2 items-center gap-20">
+      <div className="relative z-10">
+        <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-50 text-blue-600 rounded-2xl text-[10px] font-extrabold uppercase tracking-[3px] border border-blue-100 mb-8">
+          <Sparkles size={16} /> Didukung AI Generatif Terkini
         </div>
-        <h1 className="text-5xl font-bold mb-4">Buktikan Kemampuanmu.<br />Bukan Gelarmu.</h1>
-        <p className="text-lg text-gray mb-8">
-          Platform AI yang mencocokkan lulusan SMK/SMA dengan pekerjaan yang tepat — berdasarkan skill nyata, bukan ijazah atau jurusan.
+        <h1 className="text-7xl font-black text-navy tracking-tight leading-[1.05] mb-8">
+          Buktikan <br/>
+          <span className="text-blue-600">Skill Nyatamu,</span> <br/>
+          Bukan Ijazahmu.
+        </h1>
+        <p className="text-xl text-slate-500 font-medium mb-12 max-w-xl leading-relaxed">
+          Konekta menggunakan AI untuk mencocokkan lulusan SMK/SMA dengan pekerjaan impian berdasarkan kompetensi aktual, bukan sekadar gelar.
         </p>
-        <div className="flex gap-4 mb-8">
-          <Link to="/assessment" className="btn btn-solid-blue w-full">Mulai Tes Gratis <ArrowRight size={18} /></Link>
-          <Link to="/perusahaan/dashboard" className="btn btn-outline-blue w-full"><Building size={18} /> Saya Perusahaan</Link>
+        
+        <div className="flex flex-col sm:flex-row gap-6 mb-12">
+          <Link to="/assessment" className="px-10 py-5 bg-navy text-white rounded-[24px] text-sm font-extrabold shadow-2xl shadow-navy/20 hover:bg-blue-600 hover:-translate-y-1 transition-all active:translate-y-0 uppercase tracking-widest flex items-center justify-center gap-3">
+            Mulai Tes Gratis <ArrowRight size={20} />
+          </Link>
+          <Link to="/perusahaan/dashboard" className="px-10 py-5 bg-white border-2 border-slate-100 text-navy rounded-[24px] text-sm font-extrabold hover:border-navy hover:shadow-lg transition-all flex items-center justify-center gap-3 uppercase tracking-widest">
+            <Building size={20} /> Untuk Perusahaan
+          </Link>
         </div>
-        <div className="flex gap-4 flex-wrap">
-          <div className="flex items-center gap-2 text-sm font-medium"><CheckCircle2 size={16} className="text-teal" /> Tidak perlu CV</div>
-          <div className="flex items-center gap-2 text-sm font-medium"><CheckCircle2 size={16} className="text-teal" /> Tes hanya 45 menit</div>
-          <div className="flex items-center gap-2 text-sm font-medium"><CheckCircle2 size={16} className="text-teal" /> Gratis untuk kandidat</div>
+        
+        <div className="flex gap-8 flex-wrap">
+          {[
+            { icon: <Zap size={16}/>, text: 'Tanpa CV' },
+            { icon: <Target size={16}/>, text: 'Tes 45 Menit' },
+            { icon: <ShieldCheck size={16}/>, text: 'Gratis & Terverifikasi' }
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-3 text-[11px] font-extrabold text-slate-400 uppercase tracking-widest">
+              <div className="text-teal-500">{item.icon}</div> {item.text}
+            </div>
+          ))}
         </div>
       </div>
 
-      <div style={{ flex: '0 0 45%', position: 'relative' }}>
-        <div className="card" style={{ position: 'relative', zIndex: 10 }}>
-          <div className="flex justify-between items-start mb-6">
-            <div className="flex items-center gap-4">
-              <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'var(--blue-light)', color: 'var(--blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>RD</div>
+      <div className="relative">
+        <div className="relative z-10 bg-white rounded-[48px] p-10 shadow-premium border border-slate-100 transform lg:rotate-2 hover:rotate-0 transition-transform duration-700">
+          <div className="flex justify-between items-start mb-10">
+            <div className="flex items-center gap-6">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-400 rounded-3xl flex items-center justify-center text-white text-2xl font-black shadow-xl">RD</div>
               <div>
-                <h4 className="font-bold text-lg">Raka Dermawan</h4>
-                <p className="text-xs text-gray">SMK Teknik Mesin</p>
+                <h4 className="font-extrabold text-2xl text-navy">Raka Dermawan</h4>
+                <p className="text-sm text-slate-400 font-bold uppercase tracking-widest mt-1">SMK Teknik Mesin</p>
               </div>
             </div>
-            <div className="badge badge-teal" style={{ position: 'absolute', top: '-12px', right: '-12px', boxShadow: 'var(--shadow-md)' }}>87% Match Score</div>
-          </div>
-
-          <div className="flex flex-col gap-4 mb-6">
-            <div>
-              <div className="flex justify-between text-xs font-semibold mb-1"><span className="text-blue">Logika & Analitik</span><span>88%</span></div>
-              <div className="progress-wrap"><div className="progress-bar bg-blue" style={{ width: '88%' }}></div></div>
-            </div>
-            <div>
-              <div className="flex justify-between text-xs font-semibold mb-1"><span className="text-teal">Komunikasi</span><span>76%</span></div>
-              <div className="progress-wrap"><div className="progress-bar bg-teal" style={{ width: '76%' }}></div></div>
-            </div>
-            <div>
-              <div className="flex justify-between text-xs font-semibold mb-1"><span className="text-purple">Kepribadian Kerja</span><span>91%</span></div>
-              <div className="progress-wrap"><div className="progress-bar bg-purple" style={{ width: '91%' }}></div></div>
-            </div>
-            <div>
-              <div className="flex justify-between text-xs font-semibold mb-1"><span className="text-amber">Teknis Spesifik</span><span>82%</span></div>
-              <div className="progress-wrap"><div className="progress-bar bg-amber" style={{ width: '82%' }}></div></div>
+            <div className="px-5 py-2 bg-teal-50 text-teal-600 rounded-2xl text-[11px] font-extrabold uppercase tracking-widest border border-teal-100 shadow-sm animate-bounce">
+              87% Match
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-sm font-bold text-teal bg-teal-light p-2 rounded" style={{ justifyContent: 'center' }}>
-            <CheckCircle2 size={16} /> Terverifikasi AI
+          <div className="space-y-6 mb-10">
+            {[
+              { label: 'Logika & Analitik', val: 88, color: 'blue' },
+              { label: 'Komunikasi Kerja', val: 76, color: 'teal' },
+              { label: 'Kepribadian Kerja', val: 91, color: 'purple' },
+              { label: 'Teknis Spesifik', val: 82, color: 'amber' }
+            ].map(stat => (
+              <div key={stat.label}>
+                <div className="flex justify-between text-[10px] font-extrabold uppercase tracking-widest mb-2.5">
+                  <span className="text-slate-400">{stat.label}</span>
+                  <span className="text-navy">{stat.val}%</span>
+                </div>
+                <div className="h-2.5 bg-slate-50 rounded-full overflow-hidden border border-slate-100 p-0.5">
+                  <div className={`h-full bg-blue-500 rounded-full transition-all duration-1000`} style={{ width: `${stat.val}%` }}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-center gap-3 text-[11px] font-extrabold text-teal-600 bg-teal-50 py-4 rounded-2xl border border-teal-100 uppercase tracking-widest">
+            <ShieldCheck size={18} /> Terverifikasi AI Global
           </div>
         </div>
 
-        <div className="card" style={{ position: 'absolute', bottom: '-20px', right: '-20px', zIndex: 11, padding: '12px' }}>
-          <p className="text-xs font-bold flex items-center gap-2">🎉 Diterima di PT Astra International</p>
+        {/* Decorative Floating Card */}
+        <div className="absolute -bottom-10 -left-10 z-20 bg-white rounded-3xl p-6 shadow-premium border border-slate-100 flex items-center gap-4 animate-float">
+          <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center text-green-600">
+            <CheckCircle2 size={24} />
+          </div>
+          <div>
+            <p className="text-xs font-extrabold text-navy uppercase tracking-widest">Accepted at</p>
+            <p className="font-black text-navy">PT Astra International</p>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+);
+
+const Logos = () => (
+  <section className="py-20 border-y border-slate-100 bg-slate-50/50 overflow-hidden">
+    <div className="container mx-auto px-6">
+      <p className="text-center text-[10px] font-extrabold text-slate-400 uppercase tracking-[4px] mb-12">Dipercaya oleh 500+ Perusahaan Progresif</p>
+      <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+        {['Astra', 'Shopee', 'Gojek', 'JNE', 'Samsung', 'Toyota'].map(logo => (
+          <span key={logo} className="text-2xl font-black text-navy italic tracking-tighter">{logo}</span>
+        ))}
       </div>
     </div>
   </section>
 );
 
 const CaraKerjaKandidat = () => (
-  <section id="kandidat" className="section bg-white text-center">
-    <div className="container">
-      <div className="badge badge-blue" style={{ marginBottom: '12px' }}>Untuk Kandidat</div>
-      <h2 className="section-title">Dari Daftar Sampai Dapat Kerja</h2>
-      <p className="section-subtitle" style={{ marginBottom: '48px' }}>7 langkah mudah yang semuanya dipandu AI</p>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px', textAlign: 'left' }}>
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'var(--blue)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', flexShrink: 0 }}>1</div>
-            <ClipboardList size={16} style={{ color: 'var(--blue)', flexShrink: 0 }} />
-            <h3 style={{ fontWeight: '700', fontSize: '0.95rem', margin: 0, flex: 1 }}>Daftar 2 Menit</h3>
-            <span className="badge badge-amber">Gratis</span>
-          </div>
-          <p style={{ color: 'var(--teal)', fontWeight: '600', fontSize: '0.8rem', marginBottom: '10px' }}>Tidak perlu CV &amp; pengalaman.</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <input disabled placeholder="Nama Lengkap" style={{ padding: '8px 12px', borderRadius: '6px', border: '1px solid #E2E8F0', background: '#F8FAFC', fontSize: '0.8rem', width: '100%' }} />
-            <select disabled style={{ padding: '8px 12px', borderRadius: '6px', border: '1px solid #E2E8F0', background: '#F8FAFC', fontSize: '0.8rem', width: '100%' }}><option>SMK / SMA</option></select>
-          </div>
-        </div>
-
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: '#10B981', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', flexShrink: 0 }}>2</div>
-            <BrainCircuit size={16} style={{ color: '#10B981', flexShrink: 0 }} />
-            <h3 style={{ fontWeight: '700', fontSize: '0.95rem', margin: 0 }}>Tes Berbasis AI</h3>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', marginBottom: '10px' }}>
-            {['🧠 Logika', '💬 Bahasa', '🎯 Situasional', '🌟 Kepribadian'].map(t => (
-              <div key={t} style={{ padding: '7px 8px', borderRadius: '6px', border: '1px solid #E2E8F0', background: '#F8FAFC', fontSize: '0.72rem', textAlign: 'center' }}>{t}</div>
-            ))}
-          </div>
-          <p style={{ fontSize: '0.72rem', color: '#64748B' }}>⏱ Maks 45 menit • Bisa dari HP spesifikasi rendah</p>
-        </div>
-
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: '#7C3AED', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', flexShrink: 0 }}>3</div>
-            <Award size={16} style={{ color: '#7C3AED', flexShrink: 0 }} />
-            <h3 style={{ fontWeight: '700', fontSize: '0.95rem', margin: 0 }}>AI Buat Profilmu</h3>
-          </div>
-          <div style={{ background: '#EDE9FE', borderRadius: '8px', padding: '10px', marginBottom: '10px', display: 'flex', gap: '8px' }}>
-            <Lightbulb size={15} style={{ color: '#7C3AED', flexShrink: 0, marginTop: '1px' }} />
-            <p style={{ fontSize: '0.72rem', color: '#7C3AED', fontWeight: '600', margin: 0 }}>Hidden Talent: Problem-solving di atas rata-rata</p>
-          </div>
-          <p style={{ fontSize: '0.72rem', color: '#64748B' }}>Sertifikat Digital Terverifikasi yang bisa dibagikan ke perusahaan mana pun.</p>
-        </div>
-
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'var(--blue)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', flexShrink: 0 }}>4</div>
-            <Target size={16} style={{ color: 'var(--blue)', flexShrink: 0 }} />
-            <h3 style={{ fontWeight: '700', fontSize: '0.95rem', margin: 0 }}>AI Mencarikan Kerja</h3>
-          </div>
-          <div style={{ border: '1px solid #E2E8F0', borderRadius: '8px', padding: '12px', position: 'relative' }}>
-            <span className="badge badge-teal" style={{ position: 'absolute', top: '8px', right: '8px', fontSize: '0.68rem' }}>87% Match</span>
-            <p style={{ fontWeight: '700', fontSize: '0.85rem', marginBottom: '3px' }}>Staff Quality Control</p>
-            <p style={{ fontSize: '0.72rem', color: '#64748B', marginBottom: '8px' }}>PT Astra International • Manufaktur</p>
-            <span style={{ fontSize: '0.68rem', fontWeight: '600', color: 'var(--blue)', background: '#EFF6FF', padding: '3px 8px', borderRadius: '4px' }}>Cocok meski jurusan otomotif</span>
-          </div>
-        </div>
-
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: '#10B981', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', flexShrink: 0 }}>5</div>
-            <Send size={16} style={{ color: '#10B981', flexShrink: 0 }} />
-            <h3 style={{ fontWeight: '700', fontSize: '0.95rem', margin: 0 }}>Lamar Tanpa Repot</h3>
-          </div>
-          <p style={{ fontSize: '0.85rem', color: '#64748B', marginBottom: '12px' }}>Profil kompetensimu langsung terkirim. Tidak perlu tulis surat lamaran.</p>
-          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-            {['Dikirim ✓', 'Dibaca ✓', 'Diproses...'].map((s, i) => (
-              <span key={i} style={{ fontSize: '0.72rem', fontWeight: '700', color: '#10B981', background: '#D1FAE5', padding: '4px 10px', borderRadius: '99px' }}>{s}</span>
-            ))}
-          </div>
-        </div>
-
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: '#7C3AED', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', flexShrink: 0 }}>6</div>
-            <Mic size={16} style={{ color: '#7C3AED', flexShrink: 0 }} />
-            <h3 style={{ fontWeight: '700', fontSize: '0.95rem', margin: 0 }}>Interview AI Coach</h3>
-          </div>
-          <div style={{ background: '#F8FAFC', borderRadius: '8px', padding: '10px', marginBottom: '10px', fontFamily: 'monospace', fontSize: '0.72rem' }}>
-            <p style={{ color: 'var(--blue)', fontWeight: '700', marginBottom: '4px' }}>AI Coach:</p>
-            <p style={{ margin: 0 }}>"Ceritakan dirimu & mengapa tertarik posisi QC?"</p>
-          </div>
-          <div style={{ display: 'flex', gap: '6px' }}>
-            <span className="badge badge-blue" style={{ fontSize: '0.68rem' }}>📋 Standar Astra</span>
-            <span className="badge badge-purple" style={{ fontSize: '0.68rem' }}>🎌 Budaya Jepang</span>
-          </div>
-        </div>
+  <section id="kandidat" className="py-32 bg-white overflow-hidden">
+    <div className="container mx-auto px-6">
+      <div className="text-center mb-24">
+        <div className="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 rounded-xl text-[10px] font-extrabold uppercase tracking-widest border border-blue-100 mb-6">Untuk Kandidat</div>
+        <h2 className="text-5xl font-black text-navy tracking-tight mb-6 leading-tight">Mulai Karirmu dalam <br/> 7 Langkah Mudah</h2>
+        <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto">Semua proses dipandu sepenuhnya oleh AI untuk memastikan kamu mendapatkan hasil terbaik.</p>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <div className="card" style={{ width: '100%', maxWidth: '400px', textAlign: 'left' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'var(--blue)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', flexShrink: 0 }}>7</div>
-            <LineChart size={16} style={{ color: 'var(--blue)', flexShrink: 0 }} />
-            <h3 style={{ fontWeight: '700', fontSize: '0.95rem', margin: 0 }}>Terus Berkembang</h3>
-          </div>
-          <p style={{ fontSize: '0.85rem', color: '#64748B', marginBottom: '10px' }}>Rekomendasi kursus gratis untuk tingkatkan skill dan peluang kerja.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-            <div style={{ padding: '10px', border: '1px solid #E2E8F0', borderRadius: '8px', fontSize: '0.8rem' }}><strong>Kursus Excel</strong><br /><span style={{ color: '#64748B', fontSize: '0.72rem' }}>Tutup gap data entry</span></div>
-            <div style={{ padding: '10px', border: '1px solid #E2E8F0', borderRadius: '8px', fontSize: '0.8rem' }}><strong>Komunikasi</strong><br /><span style={{ color: '#64748B', fontSize: '0.72rem' }}>Tingkatkan skor 15%</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-const CaraKerjaPerusahaan = () => (
-  <section id="perusahaan" className="section bg-gray text-center">
-    <div className="container">
-      <div className="badge badge-navy mb-4">Untuk Perusahaan HR</div>
-      <h2 className="section-title">Rekrut Talenta Terbaik Tanpa Baca Ratusan CV</h2>
-
-      <div className="flex flex-wrap justify-center gap-6 mt-12 pb-4" style={{ textAlign: 'left' }}>
-
-        <div className="card flex-1" style={{ minWidth: '280px', maxWidth: '350px' }}>
-          <h1 className="text-4xl font-bold text-blue mb-4">01</h1>
-          <div className="flex items-center gap-2 mb-2">
-            <Settings className="text-navy" size={20} />
-            <h3 className="font-bold text-lg">Buka Lowongan Presisi</h3>
-          </div>
-          <div className="bg-teal-light text-teal p-2 rounded text-xs font-semibold mb-4">AI membantu mendefinisikan skill</div>
-          <p className="text-sm text-gray">Selesai dalam 10 menit dengan bantuan AI untuk merumuskan kebutuhan.</p>
-        </div>
-
-        <div className="card flex-1" style={{ minWidth: '280px', maxWidth: '350px' }}>
-          <h1 className="text-4xl font-bold text-blue mb-4">02</h1>
-          <div className="flex items-center gap-2 mb-2">
-            <Filter className="text-navy" size={20} />
-            <h3 className="font-bold text-lg">AI Langsung Bekerja</h3>
-          </div>
-          <p className="text-sm text-gray font-medium mb-2">500+ Kandidat → 15 Terbaik</p>
-          <ul className="text-xs text-gray space-y-1">
-            <li>⚡ Hasil dalam &lt; 1 jam</li>
-            <li>🎯 Akurasi pencocokan 87%</li>
-          </ul>
-        </div>
-
-        <div className="card flex-1" style={{ minWidth: '280px', maxWidth: '350px' }}>
-          <h1 className="text-4xl font-bold text-blue mb-4">03</h1>
-          <div className="flex items-center gap-2 mb-2">
-            <FileCheck className="text-navy" size={20} />
-            <h3 className="font-bold text-lg">Verifikasi & Seleksi</h3>
-          </div>
-          <div className="text-sm font-mono bg-gray p-2 rounded mb-2">
-            #1 Raka D. - 87% ✓<br />
-            #2 Sari W. - 82% ✓
-          </div>
-          <p className="text-xs text-gray">Semua hasil assessment bisa diverifikasi independen.</p>
-        </div>
-
-        <div className="card flex-1" style={{ minWidth: '280px', maxWidth: '350px' }}>
-          <h1 className="text-4xl font-bold text-blue mb-4">04</h1>
-          <div className="flex items-center gap-2 mb-2">
-            <Video className="text-navy" size={20} />
-            <h3 className="font-bold text-lg">Interview Platform</h3>
-          </div>
-          <div className="badge badge-purple text-xs mb-2">🎥 Video Interview Tersedia</div>
-          <p className="text-xs text-gray">Atur jadwal dan notifikasi otomatis. Ideal untuk perusahaan luar kota.</p>
-        </div>
-
-        <div className="card flex-1" style={{ minWidth: '280px', maxWidth: '350px' }}>
-          <h1 className="text-4xl font-bold text-blue mb-4">05</h1>
-          <div className="flex items-center gap-2 mb-2">
-            <RefreshCcw className="text-navy" size={20} />
-            <h3 className="font-bold text-lg">Bantu AI Cerdas</h3>
-          </div>
-          <p className="text-sm text-gray mb-2">Beri rating kandidat untuk melatih akurasi AI.</p>
-          <div className="badge badge-blue text-xs">Berkontribusi pada ekosistem</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-);
-
-// ─── Fitur Utama ────────────────────────────────────────────────────────────
-// ─── Fitur Utama (Bento Grid Style) ──────────────────────────────────────────
-// ─── Fitur Utama (Symmetrical 4-Column Grid) ──────────────────────────────────
-const FiturUtama = () => {
-  const fitur = [
-    { icon: '🚫', title: 'Tidak Perlu CV', desc: 'Sistem menilai kemampuan nyata kamu sekarang, bukan tumpukan kertas.', featured: true },
-    { icon: '🧠', title: 'Tes AI 45 Menit', desc: '5 jenis tes: logika, bahasa, situasional, kepribadian, dan teknis spesifik.' },
-    { icon: '🎯', title: 'Cocok Lintas Industri', desc: 'Lulusan SMK otomotif bisa dicocokkan ke logistik atau QC.' },
-    { icon: '💡', title: 'Deteksi Bakat', desc: 'AI menemukan potensi yang mungkin tidak kamu sadari sebelumnya.' },
-    { icon: '🏅', title: 'Sertifikat Digital', desc: 'Profil kompetensi terverifikasi AI, siap pakai secara global.' },
-    { icon: '🌏', title: 'Pasar Internasional', desc: 'Koneksi ke perusahaan Jepang, Korea, dan Asia Tenggara.' },
-    { icon: '📡', title: 'Real-Time Update', desc: 'Pantau status lamaran langsung dari dashboard kamu.' },
-    { icon: '🎤', title: 'AI Interview Coach', desc: 'Simulasi interview dengan feedback instan dari AI.' },
-  ];
-
-  return (
-    <section id="fitur" className="section" style={{ background: '#fff', padding: '100px 0' }}>
-      <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <div className="badge badge-blue" style={{ marginBottom: '16px' }}>Kenapa Konekta?</div>
-          <h2 className="section-title">Semua yang Kamu Butuhkan</h2>
-          <p className="section-subtitle">Teknologi AI untuk menjamin karir impianmu</p>
-        </div>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '24px'
-        }}>
-          {fitur.map((f, i) => (
-            <div key={i} style={{
-              background: f.featured ? 'var(--navy)' : '#F8FAFC',
-              color: f.featured ? '#fff' : 'inherit',
-              borderRadius: '24px',
-              padding: '32px',
-              border: f.featured ? 'none' : '1px solid #E2E8F0',
-              display: 'flex',
-              flexDirection: 'column',
-              boxShadow: f.featured ? '0 20px 40px rgba(15, 27, 45, 0.15)' : 'none',
-              transition: 'transform 0.3s ease'
-            }}>
-              <div style={{ fontSize: '2rem', marginBottom: '20px' }}>{f.icon}</div>
-              <h3 style={{
-                fontWeight: '800',
-                fontSize: '1.15rem',
-                color: f.featured ? '#fff' : 'var(--navy)',
-                marginBottom: '12px',
-                lineHeight: '1.3'
-              }}>{f.title}</h3>
-              <p style={{
-                fontSize: '0.9rem',
-                color: f.featured ? 'rgba(255,255,255,0.7)' : 'var(--gray-text)',
-                lineHeight: '1.6',
-                margin: 0
-              }}>{f.desc}</p>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {[
+          { step: '01', icon: <ClipboardList />, title: 'Daftar 2 Menit', desc: 'Tanpa CV, tanpa ribet. Cukup data diri dasar dan pendidikan terakhirmu.', badge: 'Gratis' },
+          { step: '02', icon: <BrainCircuit />, title: 'Tes Berbasis AI', desc: 'Tes seru selama 45 menit yang mengukur logika, bahasa, dan kepribadianmu.', badge: 'HP Friendly' },
+          { step: '03', icon: <Award />, title: 'Profil Kompetensi', desc: 'Dapatkan sertifikat digital terverifikasi yang menonjolkan bakat tersembunyimu.' },
+          { step: '04', icon: <Target />, title: 'Pencarian Otomatis', desc: 'AI kami secara aktif mencarikan lowongan yang 80%+ cocok dengan profilmu.' },
+          { step: '05', icon: <Send />, title: 'Lamar Sekali Klik', desc: 'Kirim profilmu ke puluhan perusahaan tanpa harus menulis surat lamaran.' },
+          { step: '06', icon: <Mic />, title: 'Interview Coach', desc: 'Berlatih interview dengan AI untuk meningkatkan kepercayaan dirimu.' }
+        ].map((item, i) => (
+          <div key={i} className="group p-10 rounded-[40px] border border-slate-100 bg-white hover:shadow-premium transition-all duration-500 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-700"></div>
+            <div className="relative z-10">
+               <div className="flex justify-between items-start mb-10">
+                  <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    {item.icon}
+                  </div>
+                  <span className="text-4xl font-black text-slate-100 group-hover:text-blue-500/10 transition-colors">{item.step}</span>
+               </div>
+               <h3 className="text-2xl font-extrabold text-navy mb-4 group-hover:text-blue-600 transition-colors">{item.title}</h3>
+               <p className="text-slate-500 font-medium leading-relaxed">{item.desc}</p>
+               {item.badge && <span className="inline-block mt-6 px-3 py-1 bg-teal-50 text-teal-600 text-[9px] font-black uppercase tracking-widest rounded-lg">{item.badge}</span>}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    </section>
-  );
-};
+
+      <div className="mt-20 flex justify-center">
+         <div className="bg-navy rounded-[40px] p-10 text-white w-full max-w-4xl shadow-premium relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 rounded-full blur-[80px] animate-pulse-slow"></div>
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
+               <div className="w-20 h-20 bg-white/10 backdrop-blur-xl rounded-3xl flex items-center justify-center text-blue-400 shrink-0">
+                  <LineChart size={32} />
+               </div>
+               <div className="flex-1 text-center md:text-left">
+                  <span className="text-[10px] font-black text-blue-400 uppercase tracking-[4px] mb-3 block">Step 07: Grow</span>
+                  <h4 className="text-2xl font-black mb-3">Terus Berkembang</h4>
+                  <p className="text-slate-400 font-medium">Dapatkan rekomendasi kursus gratis untuk menutup celah skill dan meningkatkan peluang karirmu secara real-time.</p>
+               </div>
+               <button className="px-10 py-5 bg-white text-navy rounded-2xl font-extrabold text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-xl whitespace-nowrap">Explore Academy</button>
+            </div>
+         </div>
+      </div>
+    </div>
+  </section>
+);
+
+const CaraKerjaPerusahaan = () => (
+  <section id="perusahaan" className="py-32 bg-slate-50 relative overflow-hidden">
+    <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
+    <div className="container mx-auto px-6 relative z-10">
+      <div className="text-center mb-24">
+        <div className="inline-block px-4 py-1.5 bg-navy text-white rounded-xl text-[10px] font-extrabold uppercase tracking-widest mb-6">Untuk Perusahaan HR</div>
+        <h2 className="text-5xl font-black text-navy tracking-tight mb-6">Rekrut Tanpa Baca CV</h2>
+        <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto">AI kami mengkurasi kandidat berdasarkan data kompetensi objektif, menghemat waktu screening hingga 90%.</p>
+      </div>
+
+      <div className="grid lg:grid-cols-5 md:grid-cols-3 gap-6">
+        {[
+          { num: '01', title: 'Open Job', icon: <Settings />, desc: 'AI membantu merumuskan kriteria skill presisi.' },
+          { num: '02', numColor: 'blue', title: 'AI Match', icon: <Filter />, desc: 'Screening 500+ kandidat dalam hitungan detik.' },
+          { num: '03', title: 'Verify', icon: <FileCheck />, desc: 'Akses hasil assessment terverifikasi blockchain.' },
+          { num: '04', title: 'Video Int.', icon: <Video />, desc: 'Platform interview video terintegrasi AI.' },
+          { num: '05', title: 'Smart Learn', icon: <RefreshCcw />, desc: 'AI terus belajar dari kriteria hiring kamu.' }
+        ].map((item, i) => (
+          <div key={i} className="bg-white p-8 rounded-[32px] border border-slate-200/60 shadow-sm hover:shadow-xl transition-all duration-500 group">
+            <h1 className={`text-4xl font-black mb-8 transition-colors ${item.numColor === 'blue' ? 'text-blue-600' : 'text-slate-100 group-hover:text-blue-500/20'}`}>{item.num}</h1>
+            <div className="flex items-center gap-3 mb-4 text-navy">
+               <div className="text-blue-600">{item.icon}</div>
+               <h3 className="font-extrabold text-lg">{item.title}</h3>
+            </div>
+            <p className="text-sm text-slate-400 font-medium leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const FiturUtama = () => (
+  <section id="cara-kerja" className="py-32 bg-white">
+    <div className="container mx-auto px-6">
+      <div className="text-center mb-24">
+        <h2 className="text-5xl font-black text-navy tracking-tight mb-6">Kenapa Memilih Konekta?</h2>
+        <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto">Ekosistem AI terlengkap untuk menjembatani talenta muda dengan industri modern.</p>
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { icon: '🚫', title: 'Zero CV Policy', desc: 'Menilai kemampuan nyata, bukan tumpukan kertas.', featured: true },
+          { icon: '🧠', title: '45m AI Core', desc: 'Analisis logika, bahasa, dan teknis yang akurat.' },
+          { icon: '🎯', title: 'Cross-Industry', desc: 'Cocokkan bakat melampaui batas jurusan.' },
+          { icon: '💡', title: 'Talent Scout', desc: 'AI mendeteksi potensi tersembunyimu.' },
+          { icon: '🏅', title: 'Verified Badge', desc: 'Profil digital siap pakai secara global.' },
+          { icon: '🌏', title: 'Intl Market', desc: 'Akses ke perusahaan se-Asia Tenggara.' },
+          { icon: '📡', title: 'Live Updates', desc: 'Pantau lamaran secara real-time.' },
+          { icon: '🎤', title: 'AI Simulation', desc: 'Latihan interview dengan feedback instan.' },
+        ].map((f, i) => (
+          <div key={i} className={`p-10 rounded-[32px] transition-all duration-500 hover:-translate-y-2 cursor-default
+            ${f.featured ? 'bg-navy text-white shadow-premium' : 'bg-slate-50 border border-slate-100 text-navy hover:bg-white hover:shadow-xl'}
+          `}>
+            <div className="text-4xl mb-6">{f.icon}</div>
+            <h3 className={`text-xl font-extrabold mb-4 ${f.featured ? 'text-white' : 'text-navy'}`}>{f.title}</h3>
+            <p className={`text-sm font-medium leading-relaxed ${f.featured ? 'text-slate-400' : 'text-slate-500'}`}>{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 const Statistik = () => (
-  <section style={{ background: '#F8FAFC', padding: '100px 0' }}>
-    <div className="container">
-      {/* Testimonials First for better flow */}
-      <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-        <h2 className="section-title">Mereka Sudah Membuktikan</h2>
-        <p className="section-subtitle">Kisah sukses dari ribuan talenta Indonesia</p>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginBottom: '80px' }}>
-        {[
-          {
-            name: 'Andi Dwi Saputra', role: 'Staff QC di PT Astra',
-            quote: 'Saya pikir susah dapat kerja karena jurusan otomotif tapi mau kerja di elektronik. Konekta buktikan kalau skill saya cocok.',
-            color: 'var(--teal)'
-          },
-          {
-            name: 'Siti Rahayu', role: 'HR Manager — PT Maju Bersama',
-            quote: 'Sekarang shortlist 10 kandidat terbaik sudah ada dalam 1 jam. Kualitas kandidat jauh lebih terukur dibanding sistem lama.',
-            color: 'var(--blue)'
-          }
-        ].map((t, i) => (
-          <div key={i} style={{
-            background: '#fff',
-            borderRadius: '24px',
-            padding: '40px',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
-            position: 'relative',
-            border: '1px solid #E2E8F0'
-          }}>
-            <div style={{ position: 'absolute', top: '32px', right: '40px', fontSize: '4rem', opacity: 0.1, color: t.color }}>"</div>
-            <p style={{ fontSize: '1.15rem', lineHeight: '1.7', color: 'var(--navy)', marginBottom: '24px', fontWeight: '500' }}>{t.quote}</p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: t.color, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>{t.name[0]}</div>
-              <div>
-                <div style={{ fontWeight: '700', color: 'var(--navy)' }}>{t.name}</div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--gray-text)' }}>{t.role}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Stats Counter */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '40px',
-        background: 'var(--navy)',
-        borderRadius: '32px',
-        padding: '64px',
-        textAlign: 'center',
-        color: '#fff'
-      }}>
-        {[
-          { label: 'Kandidat', val: '10.000+' },
-          { label: 'Perusahaan', val: '500+' },
-          { label: 'Penempatan', val: '85%' },
-          { label: 'Kecepatan', val: '< 7 Hari' }
-        ].map(s => (
-          <div key={s.label}>
-            <div style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '8px' }}>{s.val}</div>
-            <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '1px' }}>{s.label}</div>
-          </div>
-        ))}
+  <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
+    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[100px] -mr-64 -mt-64 animate-pulse-slow"></div>
+    <div className="container mx-auto px-6 relative z-10">
+      <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div>
+           <h2 className="text-5xl font-black tracking-tight mb-8">Kisah Sukses <br/> Dari Seluruh Indonesia</h2>
+           <div className="space-y-8">
+              {[
+                { name: 'Andi Dwi Saputra', role: 'QC Staff @ PT Astra', quote: 'Dulu saya ragu karena jurusan otomotif tapi mau ke industri elektronik. Konekta membuktikan skill saya relevan.', color: 'blue' },
+                { name: 'Siti Rahayu', role: 'HR Manager @ PT Maju Bersama', quote: 'Screening 10 kandidat terbaik sekarang hanya butuh 1 jam. Kualitas kandidat jauh lebih terjamin.', color: 'teal' }
+              ].map((t, i) => (
+                <div key={i} className="bg-white/5 backdrop-blur-xl p-8 rounded-[32px] border border-white/5 hover:border-white/20 transition-all group">
+                   <p className="text-lg font-medium italic text-slate-300 leading-relaxed mb-8 group-hover:text-white transition-colors">"{t.quote}"</p>
+                   <div className="flex items-center gap-4">
+                      <div className={`w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 font-bold`}>{t.name[0]}</div>
+                      <div>
+                        <p className="font-extrabold text-white">{t.name}</p>
+                        <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{t.role}</p>
+                      </div>
+                   </div>
+                </div>
+              ))}
+           </div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-8">
+           {[
+             { label: 'Kandidat Aktif', val: '10.000+', sub: 'Tumbuh 20% tiap bulan' },
+             { label: 'Perusahaan Mitra', val: '500+', sub: 'Dari Startup ke Multinational' },
+             { label: 'Success Rate', val: '85%', sub: 'Penempatan kandidat' },
+             { label: 'Screening Time', val: '< 1 Jam', sub: 'Efisiensi luar biasa' }
+           ].map((s, i) => (
+             <div key={i} className="p-8 bg-blue-600/10 rounded-[32px] border border-blue-500/20 text-center group hover:bg-blue-600 transition-all duration-500">
+                <div className="text-4xl font-black mb-2 group-hover:scale-110 transition-transform">{s.val}</div>
+                <p className="text-[10px] font-black uppercase tracking-[3px] text-blue-400 group-hover:text-blue-100 mb-4">{s.label}</p>
+                <p className="text-[10px] font-bold text-slate-500 group-hover:text-white/60">{s.sub}</p>
+             </div>
+           ))}
+        </div>
       </div>
     </div>
   </section>
 );
 
-// ─── Harga ────────────────────────────────────────────────────────────────────
 const Harga = () => (
-  <section id="harga" style={{ background: '#fff', padding: '100px 0' }}>
-    <div className="container">
-      <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-        <h2 className="section-title">Harga Transparan</h2>
-        <p className="section-subtitle">Investasi terbaik untuk masa depan karir dan perusahaan Anda</p>
+  <section id="harga" className="py-32 bg-white">
+    <div className="container mx-auto px-6">
+      <div className="text-center mb-24">
+        <h2 className="text-5xl font-black text-navy tracking-tight mb-6">Investasi Masa Depan</h2>
+        <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto">Paket harga transparan untuk individu dan perusahaan dari segala skala.</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', maxWidth: '1100px', margin: '0 auto' }}>
-        {/* Simple & Clean pricing */}
+      <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {[
-          { title: 'Talenta', price: 'Gratis', sub: 'Selamanya', feat: ['1x Assessment Lengkap', 'Profil Kompetensi AI', 'Maks 5 Lamaran/Bulan'], color: 'var(--teal)' },
-          { title: 'Bisnis', price: '500rb', sub: 'Per Bulan', feat: ['5 Lowongan Aktif', 'AI Smart Shortlist', 'Match Score Otomatis'], color: 'var(--blue)', featured: true },
-          { title: 'Enterprise', price: '1.5jt', sub: 'Per Bulan', feat: ['Lowongan Tanpa Batas', 'Video Interview AI', 'Akses Internasional'], color: 'var(--purple)' }
+          { title: 'Talenta', price: 'Gratis', sub: 'Selamanya', feat: ['1x Assessment Lengkap', 'Profil Kompetensi AI', 'Sertifikat Digital', 'Maks 5 Lamaran/Bulan'], color: 'teal' },
+          { title: 'Bisnis', price: '500rb', sub: 'Per Bulan', feat: ['5 Lowongan Aktif', 'AI Smart Shortlist', 'Priority Support', 'Match Score Otomatis'], color: 'blue', featured: true },
+          { title: 'Enterprise', price: '1.5jt', sub: 'Per Bulan', feat: ['Lowongan Tanpa Batas', 'Video Interview AI', 'Akses Intl Market', 'Custom AI Training'], color: 'purple' }
         ].map((p, i) => (
-          <div key={i} style={{
-            background: p.featured ? 'var(--navy)' : '#fff',
-            color: p.featured ? '#fff' : 'var(--navy)',
-            borderRadius: '32px',
-            padding: '48px 40px',
-            border: p.featured ? 'none' : '1px solid #E2E8F0',
-            boxShadow: p.featured ? '0 30px 60px rgba(15,27,45,0.2)' : 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            transition: 'transform 0.3s ease'
-          }}>
-            <h4 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '8px', color: p.featured ? '#fff' : p.color }}>{p.title}</h4>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '8px' }}>
-              <span style={{ fontSize: '2.5rem', fontWeight: '800' }}>{p.price}</span>
+          <div key={i} className={`p-12 rounded-[48px] border flex flex-col transition-all duration-500 hover:-translate-y-4
+            ${p.featured ? 'bg-navy text-white shadow-premium border-navy' : 'bg-white border-slate-100 text-navy hover:shadow-xl'}
+          `}>
+            <span className={`text-[10px] font-black uppercase tracking-[4px] mb-8 ${p.featured ? 'text-blue-400' : `text-blue-500`}`}>{p.title}</span>
+            <div className="flex items-baseline gap-2 mb-2">
+              <span className="text-6xl font-black tracking-tighter">{p.price}</span>
             </div>
-            <p style={{ fontSize: '0.9rem', opacity: 0.6, marginBottom: '32px' }}>{p.sub}</p>
-
-            <div style={{ height: '1px', background: p.featured ? 'rgba(255,255,255,0.1)' : '#E2E8F0', marginBottom: '32px' }}></div>
-
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, flex: 1, display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '40px' }}>
+            <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-10">{p.sub}</p>
+            
+            <div className={`h-px w-full mb-10 ${p.featured ? 'bg-white/10' : 'bg-slate-100'}`}></div>
+            
+            <ul className="space-y-6 flex-1 mb-12">
               {p.feat.map(f => (
-                <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem' }}>
-                  <span style={{ color: p.featured ? '#fff' : p.color }}>✓</span> {f}
+                <li key={f} className="flex items-center gap-4 text-sm font-bold">
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] ${p.featured ? 'bg-blue-500/20 text-blue-400' : 'bg-slate-50 text-slate-400'}`}>✓</div>
+                  {f}
                 </li>
               ))}
             </ul>
 
-            <button style={{
-              width: '100%',
-              padding: '16px',
-              borderRadius: '16px',
-              border: 'none',
-              background: p.featured ? 'var(--blue)' : '#F1F5F9',
-              color: p.featured ? '#fff' : 'var(--navy)',
-              fontWeight: '700',
-              cursor: 'pointer'
-            }}>Pilih Paket</button>
+            <button className={`w-full py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl transition-all
+              ${p.featured ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-slate-50 text-navy hover:bg-navy hover:text-white'}
+            `}>Pilih Paket Sekarang</button>
           </div>
         ))}
       </div>
@@ -488,56 +371,30 @@ const Harga = () => (
 
 const FAQ = () => {
   const [open, setOpen] = useState<string | null>(null);
-
-  const toggle = (id: string) => {
-    setOpen(open === id ? null : id);
-  };
-
   return (
-    <section className="section bg-white">
-      <div className="container">
-        <h2 className="section-title text-center mb-12">Pertanyaan yang Sering Ditanyakan</h2>
-
-        <div className="grid grid-cols-2 gap-12">
-          <div>
-            <div className="badge badge-teal mb-6">Untuk Kandidat</div>
-            <div className="space-y-4">
-              <div className="card cursor-pointer p-6" onClick={() => toggle('k1')}>
-                <div className="flex justify-between items-center font-bold">
-                  <span>Apakah saya perlu pengalaman kerja? <span className="badge badge-amber ml-2 py-0 px-2 text-xs">Populer</span></span>
-                  {open === 'k1' ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+    <section className="py-32 bg-slate-50">
+      <div className="container mx-auto px-6">
+        <h2 className="text-5xl font-black text-navy text-center mb-24 tracking-tight">Punya Pertanyaan?</h2>
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {[
+            { id: 'k1', q: 'Apakah saya perlu pengalaman kerja?', a: 'Tidak sama sekali. Sistem kami dirancang khusus untuk lulusan baru. Yang dinilai adalah potensi dan kemampuan aktual kamu sekarang, bukan riwayat pekerjaan.', cat: 'Kandidat' },
+            { id: 'k2', q: 'Bagaimana kalau HP saya tidak canggih?', a: 'Aplikasi dirancang sangat ringan dan bisa berjalan di HP spesifikasi rendah. Kamu bisa menyimpan progress tes sementara dan melanjutkan kapan pun.', cat: 'Kandidat' },
+            { id: 'p1', q: 'Seberapa akurat pencocokan AI-nya?', a: 'Rata-rata akurasi matching mencapai 85-91% berdasarkan feedback ribuan perusahaan. AI terus belajar setiap hari.', cat: 'Perusahaan' },
+            { id: 'p2', q: 'Bisa rekrut untuk luar negeri?', a: 'Sangat bisa. Kami memiliki kemitraan dengan agensi di Jepang, Korea, dan Taiwan untuk menyalurkan talenta terbaik Indonesia.', cat: 'Perusahaan' }
+          ].map(f => (
+            <div key={f.id} className="bg-white rounded-[32px] p-8 shadow-sm hover:shadow-xl transition-all cursor-pointer group" onClick={() => setOpen(open === f.id ? null : f.id)}>
+              <div className="flex justify-between items-center">
+                <div>
+                   <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full mb-3 inline-block">{f.cat}</span>
+                   <h4 className="font-extrabold text-lg text-navy group-hover:text-blue-600 transition-colors">{f.q}</h4>
                 </div>
-                {open === 'k1' && <p className="mt-4 text-gray text-sm">Tidak sama sekali. Sistem kami dirancang khusus untuk lulusan baru. Yang dinilai adalah potensi dan kemampuan aktual kamu sekarang, bukan riwayat pekerjaan.</p>}
-              </div>
-              <div className="card cursor-pointer p-6" onClick={() => toggle('k2')}>
-                <div className="flex justify-between items-center font-bold">
-                  <span>Bagaimana kalau HP saya tidak canggih?</span>
-                  {open === 'k2' ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                <div className={`w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center transition-transform duration-300 ${open === f.id ? 'rotate-180' : ''}`}>
+                   <ChevronDown size={20} />
                 </div>
-                {open === 'k2' && <p className="mt-4 text-gray text-sm">Aplikasi dirancang ringan dan bisa berjalan di HP spesifikasi rendah. Kamu bisa menyimpan progress tes sementara dan melanjutkan kapan pun ada koneksi.</p>}
               </div>
+              {open === f.id && <p className="mt-6 text-slate-500 font-medium leading-relaxed animate-fade-in-up">{f.a}</p>}
             </div>
-          </div>
-
-          <div>
-            <div className="badge badge-blue mb-6">Untuk Perusahaan</div>
-            <div className="space-y-4">
-              <div className="card cursor-pointer p-6" onClick={() => toggle('p1')}>
-                <div className="flex justify-between items-center font-bold">
-                  <span>Bagaimana cara kerjanya secara teknis? <span className="badge badge-amber ml-2 py-0 px-2 text-xs">Populer</span></span>
-                  {open === 'p1' ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                </div>
-                {open === 'p1' && <p className="mt-4 text-gray text-sm">Pengguna daftar, ikuti assessment AI maksimal 45 menit, AI membangun profil kompetensi otomatis, lalu langsung mencocokkan ke posisi yang tersedia. Perusahaan tinggal terima shortlist.</p>}
-              </div>
-              <div className="card cursor-pointer p-6" onClick={() => toggle('p2')}>
-                <div className="flex justify-between items-center font-bold">
-                  <span>Seberapa akurat pencocokan AI-nya?</span>
-                  {open === 'p2' ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                </div>
-                {open === 'p2' && <p className="mt-4 text-gray text-sm">Rata-rata akurasi matching 85-91% berdasarkan feedback dari perusahaan mitra. Semakin banyak data dan feedback yang masuk, semakin akurat sistemnya.</p>}
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -545,44 +402,46 @@ const FAQ = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-navy text-white pt-16 pb-8">
-    <div className="container">
-      <div className="grid grid-cols-4 gap-8 mb-12">
-        <div>
-          <div className="flex items-center gap-2 mb-4">
-            <BrainCircuit size={28} className="text-blue" />
-            <span className="font-bold text-xl">Konekta</span>
+  <footer className="bg-[#0B1120] text-white pt-32 pb-12 overflow-hidden relative">
+    <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px] -mr-32 -mb-32"></div>
+    <div className="container mx-auto px-6 relative z-10">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-20 mb-32">
+        <div className="col-span-1 lg:col-span-1">
+          <Link to="/" className="flex items-center gap-3 mb-10 group">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl flex items-center justify-center">
+              <BrainCircuit size={24} className="text-white" />
+            </div>
+            <span className="font-extrabold text-2xl tracking-tighter">Konekta</span>
+          </Link>
+          <p className="text-slate-500 font-medium leading-relaxed mb-10 max-w-xs">Platform AI rekrutmen masa depan yang memprioritaskan skill nyata di atas segalanya.</p>
+          <div className="flex gap-4">
+             {[1,2,3,4].map(i => <div key={i} className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 hover:bg-blue-600 transition-colors cursor-pointer"></div>)}
           </div>
-          <p className="text-gray text-sm">Buktikan Kemampuanmu. Bukan Gelarmu. Platform AI rekrutmen masa depan untuk talenta Indonesia.</p>
         </div>
-        <div>
-          <h4 className="font-bold mb-4">Kandidat</h4>
-          <ul className="space-y-2 text-sm text-gray">
-            <li><a href="#" className="hover:text-blue">Cara Kerja</a></li>
-            <li><Link to="/assessment" className="hover:text-blue">Mulai Tes Gratis</Link></li>
-            <li><a href="#" className="hover:text-blue">Kisah Sukses</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-bold mb-4">Perusahaan</h4>
-          <ul className="space-y-2 text-sm text-gray">
-            <li><a href="#" className="hover:text-blue">Fitur Rekrutmen AI</a></li>
-            <li><a href="#" className="hover:text-blue">Harga Paket</a></li>
-            <li><Link to="/perusahaan/dashboard" className="hover:text-blue">Login HR</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-bold mb-4">Bantuan</h4>
-          <ul className="space-y-2 text-sm text-gray">
-            <li><a href="#" className="hover:text-blue">FAQ</a></li>
-            <li><a href="#" className="hover:text-blue">Kebijakan Privasi</a></li>
-            <li><a href="#" className="hover:text-blue">Hubungi Kami</a></li>
-          </ul>
-        </div>
+        
+        {[
+          { title: 'Kandidat', links: ['Cara Kerja', 'Assessment', 'Dashboard', 'Academy'] },
+          { title: 'Perusahaan', links: ['Rekrutmen AI', 'Pricing', 'Enterprise', 'Mitra HR'] },
+          { title: 'Bantuan', links: ['Tentang Kami', 'Pusat Bantuan', 'Privasi', 'Kontak'] }
+        ].map((col, i) => (
+          <div key={i}>
+            <h4 className="text-[11px] font-black text-blue-400 uppercase tracking-[4px] mb-10">{col.title}</h4>
+            <ul className="space-y-5">
+              {col.links.map(l => (
+                <li key={l}><a href="#" className="text-slate-400 font-bold hover:text-white transition-colors">{l}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
-      <div className="border-t border-gray pt-8 flex justify-between text-sm text-gray" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+      
+      <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[11px] font-extrabold text-slate-500 uppercase tracking-widest">
         <p>&copy; 2026 Konekta. All rights reserved.</p>
-        <p>🇮🇩 Indonesia | 🇬🇧 English</p>
+        <div className="flex gap-10">
+           <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+           <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+           <a href="#" className="hover:text-white transition-colors">Cookies</a>
+        </div>
       </div>
     </div>
   </footer>

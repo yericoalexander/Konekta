@@ -1,267 +1,247 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BrainCircuit, Mail, Lock, ArrowRight, Building, User, ChevronLeft } from 'lucide-react';
+import { 
+  BrainCircuit, Mail, Lock, ArrowRight, 
+  Sparkles, CheckCircle2, ShieldCheck, Zap, Globe,
+  Building2, Users, Target, BarChart2
+} from 'lucide-react';
 
-export default function Login() {
-  const [activeTab, setActiveTab] = useState<'kandidat' | 'perusahaan'>('kandidat');
+const Login: React.FC = () => {
   const navigate = useNavigate();
+  const [userType, setUserType] = useState<'kandidat' | 'perusahaan'>('kandidat');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (activeTab === 'kandidat') {
-      navigate('/kandidat/dashboard');
-    } else {
-      
-      navigate('/perusahaan/dashboard');
-    }
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigate(userType === 'kandidat' ? '/kandidat/dashboard' : '/perusahaan/dashboard');
+    }, 1500);
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', background: 'radial-gradient(circle at top right, #F1F5F9 0%, #E2E8F0 100%)' }}>
-      <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column' }} className="animate-fade-in-up">
-        {/* Back Link */}
-        <Link to="/" style={{ 
-          display: 'inline-flex', 
-          alignItems: 'center', 
-          gap: '8px', 
-          color: 'var(--gray-text)', 
-          fontSize: '0.9rem', 
-          fontWeight: '600',
-          textDecoration: 'none',
-          marginBottom: '20px',
-          transition: 'color 0.2s'
-        }} className="hover:text-blue">
-          <ChevronLeft size={18} /> Kembali ke Beranda
-        </Link>
-
-        <div className="card" style={{ padding: '0', borderRadius: '32px', boxShadow: '0 30px 100px rgba(15, 27, 45, 0.12)', display: 'flex', overflow: 'hidden', background: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>
-          {/* Left Side: Branding */}
-          <div style={{ 
-            flex: '0 0 42%', 
-            background: 'linear-gradient(135deg, var(--navy) 0%, #1a2a3a 100%)', 
-            padding: '56px', 
-            display: 'flex', 
-            flexDirection: 'column', 
-            justifyContent: 'center',
-            color: '#fff',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
-            {/* Animated Blobs */}
-            <div className="animate-pulse-slow" style={{ 
-              position: 'absolute', 
-              top: '-10%', 
-              right: '-10%', 
-              width: '250px', 
-              height: '250px', 
-              background: 'var(--blue)', 
-              borderRadius: '50%', 
-              filter: 'blur(80px)',
-              zIndex: 0
-            }}></div>
-            <div className="animate-pulse-slow" style={{ 
-              position: 'absolute', 
-              bottom: '-20%', 
-              left: '-20%', 
-              width: '300px', 
-              height: '300px', 
-              background: 'var(--purple)', 
-              borderRadius: '50%', 
-              filter: 'blur(100px)',
-              zIndex: 0,
-              animationDelay: '1s'
-            }}></div>
-            
-            <div className="animate-float" style={{ 
-              width: '64px', 
-              height: '64px', 
-              background: 'var(--blue)', 
-              borderRadius: '20px', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              color: '#fff',
-              marginBottom: '40px',
-              boxShadow: '0 12px 24px rgba(37,99,235,0.4)',
-              zIndex: 1,
-              position: 'relative'
-            }}>
-              <BrainCircuit size={36} />
+    <div className="min-h-screen flex bg-white font-sans overflow-hidden">
+      
+      {/* LEFT SIDE — AUTH FORM */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 md:p-20 relative">
+        <div className="absolute top-0 left-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -ml-32 -mt-32"></div>
+        <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl -mr-32 -mb-32"></div>
+        
+        <div className="w-full max-w-[420px] relative z-10">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 mb-10 group no-underline w-fit">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl flex items-center justify-center shadow-xl shadow-blue-500/30 transform group-hover:rotate-6 transition-transform">
+              <BrainCircuit size={28} className="text-white" />
             </div>
-            
-            <div className="animate-slide-in-right" style={{ position: 'relative', zIndex: 1 }}>
-              <h1 style={{ fontSize: '2.25rem', fontWeight: '800', marginBottom: '20px', lineHeight: '1.2', letterSpacing: '-0.02em', color: '#fff' }}>
-                {activeTab === 'kandidat' ? 'Mulai Langkah Karirmu' : 'Rekrut Talenta Terbaik'}
-              </h1>
-              <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', lineHeight: '1.7', marginBottom: '0', fontWeight: '500' }}>
-                {activeTab === 'kandidat' 
-                  ? 'Buktikan kemampuan aslimu dan temukan pekerjaan impian dengan bantuan AI Konekta.' 
-                  : 'Temukan kandidat paling cocok secara instan dengan validasi kemampuan berbasis AI.'}
-              </p>
+            <span className="font-extrabold text-2xl text-[#0B1120] tracking-tighter">Konekta</span>
+          </Link>
+
+          {/* User Type Toggle */}
+          <div className="flex bg-[#F8FAFC] p-1.5 rounded-[20px] mb-10 border border-[#E2E8F0] shadow-inner">
+            <button
+              type="button"
+              onClick={() => setUserType('kandidat')}
+              className={`flex-1 py-3.5 rounded-[16px] text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
+                userType === 'kandidat' 
+                  ? 'bg-white text-blue-600 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#E2E8F0]' 
+                  : 'text-[#64748B] hover:text-[#0B1120] hover:bg-[#F1F5F9]'
+              }`}
+            >
+              Kandidat
+            </button>
+            <button
+              type="button"
+              onClick={() => setUserType('perusahaan')}
+              className={`flex-1 py-3.5 rounded-[16px] text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
+                userType === 'perusahaan' 
+                  ? 'bg-white text-[#0D9488] shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#E2E8F0]' 
+                  : 'text-[#64748B] hover:text-[#0B1120] hover:bg-[#F1F5F9]'
+              }`}
+            >
+              Perusahaan
+            </button>
+          </div>
+
+          <div className="mb-10">
+            <h1 className="text-4xl font-black text-[#0B1120] tracking-tight mb-3">Selamat Datang 👋</h1>
+            <p className="text-[#64748B] font-medium">
+              {userType === 'kandidat' 
+                ? 'Masuk untuk melanjutkan perjalanan karir AI kamu.' 
+                : 'Masuk ke HR Portal untuk merekrut talenta terbaik.'}
+            </p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-[10px] font-extrabold text-[#94A3B8] uppercase tracking-[3px] ml-1">Email Address</label>
+              <div className="relative group">
+                <div className={`absolute inset-y-0 left-0 flex items-center pointer-events-none transition-colors duration-300 ${userType === 'kandidat' ? 'text-[#94A3B8] group-focus-within:text-blue-500' : 'text-[#94A3B8] group-focus-within:text-[#0D9488]'}`} style={{ paddingLeft: '20px' }}>
+                  <Mail size={20} />
+                </div>
+                <input 
+                  type="email" 
+                  required
+                  className="block w-full pr-6 py-4 bg-[#F8FAFC] border-2 border-transparent rounded-[20px] text-[15px] font-bold text-[#0B1120] placeholder:text-[#CBD5E1] focus:bg-white outline-none transition-all duration-300 focus:border-[#E2E8F0] shadow-inner"
+                  style={{ 
+                    paddingLeft: '56px', 
+                    borderColor: userType === 'kandidat' ? (email ? '#BFDBFE' : '') : (email ? '#99F6E4' : '')
+                  }}
+                  placeholder={userType === 'kandidat' ? "name@email.com" : "hr@company.com"}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex justify-between items-center px-1">
+                <label className="text-[10px] font-extrabold text-[#94A3B8] uppercase tracking-[3px]">Password</label>
+                <a href="#" className={`text-[10px] font-extrabold uppercase tracking-widest hover:underline transition-colors ${userType === 'kandidat' ? 'text-blue-600' : 'text-[#0D9488]'}`}>Forgot Password?</a>
+              </div>
+              <div className="relative group">
+                <div className={`absolute inset-y-0 left-0 flex items-center pointer-events-none transition-colors duration-300 ${userType === 'kandidat' ? 'text-[#94A3B8] group-focus-within:text-blue-500' : 'text-[#94A3B8] group-focus-within:text-[#0D9488]'}`} style={{ paddingLeft: '20px' }}>
+                  <Lock size={20} />
+                </div>
+                <input 
+                  type="password" 
+                  required
+                  className="block w-full pr-6 py-4 bg-[#F8FAFC] border-2 border-transparent rounded-[20px] text-[15px] font-bold text-[#0B1120] placeholder:text-[#CBD5E1] focus:bg-white outline-none transition-all duration-300 focus:border-[#E2E8F0] shadow-inner"
+                  style={{ 
+                    paddingLeft: '56px', 
+                    borderColor: userType === 'kandidat' ? (password ? '#BFDBFE' : '') : (password ? '#99F6E4' : '')
+                  }}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={loading}
+              className={`w-full py-5 text-white rounded-[24px] font-black text-[11px] uppercase tracking-[3px] hover:-translate-y-1 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-3 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+              style={{
+                backgroundColor: userType === 'kandidat' ? '#2563EB' : '#0D9488',
+                boxShadow: userType === 'kandidat' ? '0 12px 32px rgba(37,99,235,0.3)' : '0 12px 32px rgba(13,148,136,0.3)'
+              }}
+            >
+              {loading ? (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              ) : (
+                <>Sign In Now <ArrowRight size={18} /></>
+              )}
+            </button>
+          </form>
+
+          <div className="mt-10">
+            <div className="relative flex items-center justify-center mb-10">
+              <div className="absolute inset-0 flex items-center px-2">
+                <div className="w-full border-t border-[#E2E8F0]"></div>
+              </div>
+              <span className="relative px-6 bg-white text-[10px] font-extrabold text-[#94A3B8] uppercase tracking-[4px]">Or continue with</span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <button className="flex items-center justify-center gap-3 py-4 border-2 border-[#E2E8F0] bg-white rounded-[20px] text-[10px] font-extrabold uppercase tracking-widest text-[#0B1120] hover:border-[#CBD5E1] hover:bg-[#F8FAFC] transition-all">
+                <Globe size={18} className="text-blue-500" /> Google
+              </button>
+              <button className="flex items-center justify-center gap-3 py-4 border-2 border-[#E2E8F0] bg-white rounded-[20px] text-[10px] font-extrabold uppercase tracking-widest text-[#0B1120] hover:border-[#CBD5E1] hover:bg-[#F8FAFC] transition-all">
+                <ShieldCheck size={18} className="text-purple-500" /> SSO
+              </button>
             </div>
           </div>
 
-          {/* Right Side: Form */}
-          <div style={{ flex: 1, padding: '56px', background: '#fff' }}>
-            {/* Tabs */}
-            <div style={{ 
-              display: 'flex', 
-              background: '#F1F5F9', 
-              padding: '6px', 
-              borderRadius: '18px', 
-              marginBottom: '40px' 
-            }}>
-              <button 
-                onClick={() => setActiveTab('kandidat')}
-                style={{
-                  flex: 1,
-                  padding: '14px',
-                  borderRadius: '14px',
-                  border: 'none',
-                  background: activeTab === 'kandidat' ? '#fff' : 'transparent',
-                  color: activeTab === 'kandidat' ? 'var(--navy)' : 'var(--gray-text)',
-                  fontWeight: '700',
-                  fontSize: '0.95rem',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '10px',
-                  boxShadow: activeTab === 'kandidat' ? '0 4px 12px rgba(0,0,0,0.08)' : 'none',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                }}
-              >
-                <User size={20} /> Kandidat
-              </button>
-              <button 
-                onClick={() => setActiveTab('perusahaan')}
-                style={{
-                  flex: 1,
-                  padding: '14px',
-                  borderRadius: '14px',
-                  border: 'none',
-                  background: activeTab === 'perusahaan' ? '#fff' : 'transparent',
-                  color: activeTab === 'perusahaan' ? 'var(--navy)' : 'var(--gray-text)',
-                  fontWeight: '700',
-                  fontSize: '0.95rem',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '10px',
-                  boxShadow: activeTab === 'perusahaan' ? '0 4px 12px rgba(0,0,0,0.08)' : 'none',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                }}
-              >
-                <Building size={20} /> Perusahaan
-              </button>
-            </div>
+          <p className="mt-12 text-center text-sm font-bold text-[#64748B]">
+            Belum punya akun?{' '}
+            {userType === 'kandidat' ? (
+              <Link to="/assessment" className="text-blue-600 hover:text-blue-700 hover:underline transition-colors">Daftar gratis di sini</Link>
+            ) : (
+              <a href="#" className="text-[#0D9488] hover:text-[#0F766E] hover:underline transition-colors">Hubungi Tim Sales</a>
+            )}
+          </p>
+        </div>
+      </div>
 
-            {/* Form */}
-            <form onSubmit={handleLogin} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-              <div style={{ gridColumn: 'span 2' }}>
-                <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700', color: 'var(--navy)', marginBottom: '10px' }}>
-                  Email {activeTab === 'perusahaan' ? 'Perusahaan' : ''}
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <div style={{ position: 'absolute', left: '18px', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8', transition: 'color 0.2s' }}>
-                    <Mail size={20} />
-                  </div>
-                  <input 
-                    type="email" 
-                    placeholder="nama@email.com"
-                    required
-                    className="login-input"
-                    style={{
-                      width: '100%',
-                      padding: '14px 16px 14px 54px',
-                      borderRadius: '16px',
-                      border: '1.5px solid #E2E8F0',
-                      background: '#F8FAFC',
-                      fontSize: '1rem',
-                      outline: 'none',
-                      transition: 'all 0.2s ease'
-                    }}
-                  />
+      {/* RIGHT SIDE — BRAND EXPERIENCE */}
+      <div className="hidden lg:flex w-1/2 bg-[#0B1120] relative items-center justify-center overflow-hidden transition-colors duration-700">
+        {/* Animated Background Elements */}
+        {userType === 'kandidat' ? (
+          <>
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/20 rounded-full blur-[120px] -mr-96 -mt-96 animate-pulse-slow transition-all duration-1000"></div>
+            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] -ml-64 -mb-64 transition-all duration-1000"></div>
+          </>
+        ) : (
+          <>
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#0D9488]/20 rounded-full blur-[120px] -mr-96 -mt-96 animate-pulse-slow transition-all duration-1000"></div>
+            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[100px] -ml-64 -mb-64 transition-all duration-1000"></div>
+          </>
+        )}
+        
+        <div className="relative z-10 max-w-lg p-12 text-center transition-all duration-500">
+          <div className={`inline-flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-2xl text-[10px] font-extrabold uppercase tracking-[3px] border border-white/10 mb-12 transition-colors duration-500 ${userType === 'kandidat' ? 'text-blue-400' : 'text-[#2DD4BF]'}`}>
+            <Sparkles size={16} /> 
+            {userType === 'kandidat' ? 'Empowering Future Talent' : 'Empowering Modern HR'}
+          </div>
+          
+          <h2 className="text-5xl font-black text-white tracking-tight leading-[1.1] mb-8">
+            {userType === 'kandidat' ? (
+              <>Lebih dari Sekadar <br/><span className="text-blue-400 transition-colors duration-500">Portal Kerja.</span></>
+            ) : (
+              <>Rekrutmen Cerdas <br/><span className="text-[#2DD4BF] transition-colors duration-500">Berbasis AI.</span></>
+            )}
+          </h2>
+          
+          <p className="text-[#94A3B8] text-lg font-medium leading-relaxed mb-12 min-h-[84px]">
+            {userType === 'kandidat' 
+              ? 'Konekta menghubungkan potensi terbaikmu dengan kesempatan industri global melalui analisis kompetensi berbasis AI.'
+              : 'Konekta membantu perusahaan Anda menemukan talenta unggul dengan presisi tinggi melalui Smart Matching Engine.'}
+          </p>
+
+          <div className="grid grid-cols-2 gap-6 text-left">
+            {userType === 'kandidat' ? (
+              // Features for Kandidat
+              [
+                { icon: <Zap size={18}/>, title: 'Matching Presisi', desc: 'Akurasi hingga 91%' },
+                { icon: <ShieldCheck size={18}/>, title: 'Data Terverifikasi', desc: 'Blockchain certified' },
+                { icon: <CheckCircle2 size={18}/>, title: 'Tanpa Ijazah', desc: 'Fokus pada kompetensi' },
+                { icon: <Sparkles size={18}/>, title: 'AI Coaching', desc: 'Interview simulation' }
+              ].map((feat, i) => (
+                <div key={i} className="p-6 bg-white/5 backdrop-blur-md rounded-[32px] border border-white/5 hover:bg-white/10 transition-colors cursor-default">
+                  <div className="text-blue-400 mb-4">{feat.icon}</div>
+                  <h4 className="text-sm font-extrabold text-white mb-1">{feat.title}</h4>
+                  <p className="text-[10px] font-bold text-[#64748B] uppercase tracking-widest">{feat.desc}</p>
                 </div>
-              </div>
-
-              <div style={{ gridColumn: 'span 2' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                  <label style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--navy)' }}>Password</label>
-                  <a href="#" style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--blue)', textDecoration: 'none' }}>Lupa Password?</a>
+              ))
+            ) : (
+              // Features for Perusahaan
+              [
+                { icon: <Target size={18}/>, title: 'Smart Matching', desc: 'Sesuai culture & skill' },
+                { icon: <Users size={18}/>, title: 'AI Talent Pool', desc: 'Rekomendasi otomatis' },
+                { icon: <Building2 size={18}/>, title: 'Auto Shortlist', desc: 'Hemat 70% waktu screening' },
+                { icon: <BarChart2 size={18}/>, title: 'Analitik Rekrutmen', desc: 'Data-driven hiring' }
+              ].map((feat, i) => (
+                <div key={i} className="p-6 bg-white/5 backdrop-blur-md rounded-[32px] border border-white/5 hover:bg-white/10 transition-colors cursor-default">
+                  <div className="text-[#2DD4BF] mb-4">{feat.icon}</div>
+                  <h4 className="text-sm font-extrabold text-white mb-1">{feat.title}</h4>
+                  <p className="text-[10px] font-bold text-[#64748B] uppercase tracking-widest">{feat.desc}</p>
                 </div>
-                <div style={{ position: 'relative' }}>
-                  <div style={{ position: 'absolute', left: '18px', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }}>
-                    <Lock size={20} />
-                  </div>
-                  <input 
-                    type="password" 
-                    placeholder="••••••••"
-                    required
-                    style={{
-                      width: '100%',
-                      padding: '14px 16px 14px 54px',
-                      borderRadius: '16px',
-                      border: '1.5px solid #E2E8F0',
-                      background: '#F8FAFC',
-                      fontSize: '1rem',
-                      outline: 'none',
-                      transition: 'all 0.2s ease'
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div style={{ gridColumn: 'span 2', marginTop: '8px' }}>
-                <button type="submit" className="btn btn-solid-blue" style={{ width: '100%', padding: '16px', borderRadius: '16px', fontSize: '1rem', boxShadow: '0 10px 20px rgba(37, 99, 235, 0.2)' }}>
-                  Masuk Sekarang <ArrowRight size={20} />
-                </button>
-              </div>
-
-              <div style={{ gridColumn: 'span 2', textAlign: 'center' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px', margin: '20px 0' }}>
-                  <div style={{ flex: 1, height: '1px', background: '#E2E8F0' }}></div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '1px' }}>Atau Masuk Dengan</span>
-                  <div style={{ flex: 1, height: '1px', background: '#E2E8F0' }}></div>
-                </div>
-                <button type="button" style={{ 
-                  width: '100%', 
-                  padding: '14px', 
-                  borderRadius: '16px', 
-                  border: '1.5px solid #E2E8F0', 
-                  background: '#fff', 
-                  color: 'var(--navy)', 
-                  fontWeight: '700',
-                  fontSize: '0.95rem',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '12px',
-                  transition: 'all 0.2s ease'
-                }} className="hover:bg-gray">
-                  <img src="https://www.google.com/favicon.ico" alt="Google" style={{ width: '20px' }} /> Google
-                </button>
-              </div>
-
-              <div style={{ gridColumn: 'span 2', textAlign: 'center', marginTop: '16px' }}>
-                <p style={{ fontSize: '0.95rem', color: 'var(--gray-text)', margin: 0 }}>
-                  Belum punya akun?{' '}
-                  <Link to="/assessment" style={{ color: 'var(--blue)', fontWeight: '700', textDecoration: 'none' }}>Daftar Gratis</Link>
-                </p>
-              </div>
-            </form>
+              ))
+            )}
           </div>
         </div>
 
-        {/* Footer Info Outside Card to ensure visibility */}
-        <p style={{ textAlign: 'center', marginTop: '32px', fontSize: '0.8rem', color: '#94A3B8', lineHeight: '1.6' }}>
-          Dengan masuk, Anda menyetujui <a href="#" style={{ color: '#64748B', fontWeight: '600' }}>Ketentuan Layanan</a> dan <a href="#" style={{ color: '#64748B', fontWeight: '600' }}>Kebijakan Privasi</a> Konekta.
-        </p>
+        {/* Decorative Grid Pattern */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ 
+          backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+          backgroundSize: '40px 40px' 
+        }}></div>
       </div>
     </div>
   );
-}
+};
 
-
+export default Login;
