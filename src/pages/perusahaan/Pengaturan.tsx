@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
   Building2, User, Shield, CreditCard, Bell, LogOut, ChevronRight, 
-  Zap, Upload, Plus, MoreVertical, CheckCircle2, Lock, Smartphone, Key
+  Zap, Upload, Plus, MoreVertical, CheckCircle2, Smartphone, Key
 } from 'lucide-react';
 
 export default function Pengaturan() {

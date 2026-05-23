@@ -1,5 +1,4 @@
-import React from 'react';
-import { Calendar as CalendarIcon, Clock, Video, MoreVertical, Search, CheckCircle2, AlertCircle, Briefcase } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Video, MoreVertical, CheckCircle2, AlertCircle, Briefcase } from 'lucide-react';
 
 export default function Interview() {
   const interviews = [

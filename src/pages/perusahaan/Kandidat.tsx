@@ -1,5 +1,4 @@
-import React from 'react';
-import { Users, Search, Filter, CheckCircle2, MoreHorizontal, MessageSquare, Video } from 'lucide-react';
+import { Search, Filter, CheckCircle2, MoreHorizontal, MessageSquare, Video } from 'lucide-react';
 
 export default function Kandidat() {
   const candidates = [

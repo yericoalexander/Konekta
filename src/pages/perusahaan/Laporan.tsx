@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   BarChart2, TrendingUp, TrendingDown, Users, Target, Clock,
-  Download, Calendar, Briefcase, CheckCircle2, Zap, Star
+  Download, Briefcase, CheckCircle2, Zap, Star
 } from 'lucide-react';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'];
 const applicants = [120, 190, 145, 310, 280, 390];
-const hired = [3, 5, 4, 8, 7, 12];
 const maxApplicants = Math.max(...applicants);
 
 const topPositions = [

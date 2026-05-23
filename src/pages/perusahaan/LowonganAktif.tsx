@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Briefcase, Search, Plus, Filter, MoreVertical, MapPin, Users,
