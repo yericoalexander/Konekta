@@ -284,7 +284,7 @@ const Statistik = () => (
     <div className="container mx-auto px-6 relative z-10">
       <div className="grid lg:grid-cols-2 gap-20 items-center">
         <div>
-           <h2 className="text-5xl font-black tracking-tight mb-8">Kisah Sukses <br/> Dari Seluruh Indonesia</h2>
+           <h2 className="text-5xl font-black text-white tracking-tight mb-8">Kisah Sukses <br/> Dari Seluruh Indonesia</h2>
            <div className="space-y-8">
               {[
                 { name: 'Andi Dwi Saputra', role: 'QC Staff @ PT Astra', quote: 'Dulu saya ragu karena jurusan otomotif tapi mau ke industri elektronik. Konekta membuktikan skill saya relevan.', color: 'blue' },
@@ -296,7 +296,7 @@ const Statistik = () => (
                       <div className={`w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 font-bold`}>{t.name[0]}</div>
                       <div>
                         <p className="font-extrabold text-white">{t.name}</p>
-                        <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{t.role}</p>
+                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t.role}</p>
                       </div>
                    </div>
                 </div>
@@ -314,7 +314,7 @@ const Statistik = () => (
              <div key={i} className="p-8 bg-blue-600/10 rounded-[32px] border border-blue-500/20 text-center group hover:bg-blue-600 transition-all duration-500">
                 <div className="text-4xl font-black mb-2 group-hover:scale-110 transition-transform">{s.val}</div>
                 <p className="text-[10px] font-black uppercase tracking-[3px] text-blue-400 group-hover:text-blue-100 mb-4">{s.label}</p>
-                <p className="text-[10px] font-bold text-slate-500 group-hover:text-white/60">{s.sub}</p>
+                <p className="text-[10px] font-bold text-slate-400 group-hover:text-white/80">{s.sub}</p>
              </div>
            ))}
         </div>
@@ -403,37 +403,43 @@ const Footer = () => (
   <footer className="bg-[#0B1120] text-white pt-32 pb-12 overflow-hidden relative">
     <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px] -mr-32 -mb-32"></div>
     <div className="container mx-auto px-6 relative z-10">
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-20 mb-32">
-        <div className="col-span-1 lg:col-span-1">
-          <Link to="/" className="flex items-center gap-3 mb-10 group">
+      <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 mb-24 justify-between">
+        
+        {/* Left side: Logo & Info */}
+        <div className="lg:w-1/3 flex flex-col">
+          <Link to="/" className="flex items-center gap-3 mb-8 group w-fit">
             <img src="/logo-konekta.png" alt="Konekta Logo" className="h-14 w-auto object-contain scale-[1.3] transform" />
-            <span className="font-extrabold text-2xl tracking-tighter">Konekta</span>
+            <span className="font-extrabold text-2xl tracking-tighter text-white">Konekta</span>
           </Link>
-          <p className="text-slate-500 font-medium leading-relaxed mb-10 max-w-xs">Platform AI rekrutmen masa depan yang memprioritaskan skill nyata di atas segalanya.</p>
+          <p className="text-slate-300 font-medium leading-relaxed mb-8 max-w-sm text-sm">Platform AI rekrutmen masa depan yang memprioritaskan skill nyata di atas segalanya.</p>
           <div className="flex gap-4">
-             {[1,2,3,4].map(i => <div key={i} className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 hover:bg-blue-600 transition-colors cursor-pointer"></div>)}
+             {[1,2,3,4].map(i => <div key={i} className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-500 transition-colors cursor-pointer"></div>)}
           </div>
         </div>
         
-        {[
-          { title: 'Kandidat', links: ['Cara Kerja', 'Assessment', 'Dashboard', 'Academy'] },
-          { title: 'Perusahaan', links: ['Rekrutmen AI', 'Pricing', 'Enterprise', 'Mitra HR'] },
-          { title: 'Bantuan', links: ['Tentang Kami', 'Pusat Bantuan', 'Privasi', 'Kontak'] }
-        ].map((col, i) => (
-          <div key={i}>
-            <h4 className="text-[11px] font-black text-blue-400 uppercase tracking-[4px] mb-10">{col.title}</h4>
-            <ul className="space-y-5">
-              {col.links.map(l => (
-                <li key={l}><a href="#" className="text-slate-400 font-bold hover:text-white transition-colors">{l}</a></li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {/* Right side: Links Grid */}
+        <div className="lg:w-3/5 grid grid-cols-2 md:grid-cols-3 gap-10">
+          {[
+            { title: 'Kandidat', links: ['Cara Kerja', 'Assessment', 'Dashboard', 'Academy'] },
+            { title: 'Perusahaan', links: ['Rekrutmen AI', 'Pricing', 'Enterprise', 'Mitra HR'] },
+            { title: 'Bantuan', links: ['Tentang Kami', 'Pusat Bantuan', 'Privasi', 'Kontak'] }
+          ].map((col, i) => (
+            <div key={i}>
+              <h4 className="text-xs font-black text-blue-400 uppercase tracking-[3px] mb-8">{col.title}</h4>
+              <ul className="space-y-4">
+                {col.links.map(l => (
+                  <li key={l}><a href="#" className="text-slate-300 font-medium hover:text-white transition-colors text-sm">{l}</a></li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
       </div>
       
-      <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[11px] font-extrabold text-slate-500 uppercase tracking-widest">
+      <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
         <p>&copy; 2026 Konekta. All rights reserved.</p>
-        <div className="flex gap-10">
+        <div className="flex gap-8">
            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
            <a href="#" className="hover:text-white transition-colors">Cookies</a>
