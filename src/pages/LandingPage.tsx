@@ -29,9 +29,7 @@ const Navbar = () => (
   <nav className="fixed top-0 left-0 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-slate-100 shadow-sm">
     <div className="container mx-auto px-6 h-20 flex justify-between items-center">
       <Link to="/" className="flex items-center gap-3 group">
-        <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 transform group-hover:rotate-6 transition-transform">
-          <BrainCircuit size={24} className="text-white" />
-        </div>
+        <img src="/logo-konekta.png" alt="Konekta Logo" className="h-14 w-auto object-contain drop-shadow-lg scale-[1.3] transform group-hover:rotate-2 transition-transform" />
         <span className="font-extrabold text-2xl text-navy tracking-tighter">Konekta</span>
       </Link>
       
@@ -408,9 +406,7 @@ const Footer = () => (
       <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-20 mb-32">
         <div className="col-span-1 lg:col-span-1">
           <Link to="/" className="flex items-center gap-3 mb-10 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl flex items-center justify-center">
-              <BrainCircuit size={24} className="text-white" />
-            </div>
+            <img src="/logo-konekta.png" alt="Konekta Logo" className="h-14 w-auto object-contain scale-[1.3] transform" />
             <span className="font-extrabold text-2xl tracking-tighter">Konekta</span>
           </Link>
           <p className="text-slate-500 font-medium leading-relaxed mb-10 max-w-xs">Platform AI rekrutmen masa depan yang memprioritaskan skill nyata di atas segalanya.</p>

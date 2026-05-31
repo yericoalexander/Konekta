@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {
   BrainCircuit, Clock, ChevronLeft, ChevronRight,
   CheckCircle2, Sparkles, BookOpen, Users, Lightbulb,
-  Code2, AlertTriangle, ArrowRight, Zap
+  Code2, AlertTriangle, ArrowRight, Zap, X
 } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────
@@ -259,17 +259,33 @@ export default function Assessment() {
           height: 64,
           display: 'flex', alignItems: 'center', gap: 24,
         }}>
+          {/* Back/Close Button */}
+          <button 
+            onClick={() => navigate('/')} 
+            style={{ 
+              background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#94A3B8', 
+              cursor: 'pointer', display: 'flex', alignItems: 'center', 
+              justifyContent: 'center', width: 36, height: 36, marginLeft: -16,
+              borderRadius: 10, transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.color = '#94A3B8'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
+            title="Keluar dari Assessment"
+          >
+            <X size={18} />
+          </button>
+
           {/* Logo */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-            <div style={{
-              width: 36, height: 36,
-              background: 'linear-gradient(135deg,#2563EB,#3B82F6)',
-              borderRadius: 10,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 12px rgba(37,99,235,0.35)',
-            }}>
-              <BrainCircuit size={18} color="#fff" />
-            </div>
+            <img 
+              src="/logo-konekta.png" 
+              alt="Konekta Logo" 
+              style={{
+                height: 56, width: 'auto', objectFit: 'contain',
+                filter: 'drop-shadow(0 4px 12px rgba(37,99,235,0.2))',
+                transform: 'scale(1.3)'
+              }}
+            />
             <div>
               <p style={{ color: '#fff', fontWeight: 800, fontSize: 13, lineHeight: 1 }}>Assessment</p>
               <p style={{ color: '#60A5FA', fontWeight: 700, fontSize: 9, letterSpacing: 2, textTransform: 'uppercase', marginTop: 3 }}>Konekta AI</p>

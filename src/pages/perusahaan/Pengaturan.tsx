@@ -30,9 +30,7 @@ export default function Pengaturan() {
              
              <div className="flex items-center gap-8 mb-10">
                 <div className="relative group">
-                  <div className="w-28 h-28 bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl flex items-center justify-center font-black text-white text-4xl shadow-lg shadow-blue-500/20">
-                     MB
-                  </div>
+                  <img src="/logo-konekta.png" alt="Company Logo" className="w-28 h-28 object-contain drop-shadow-lg" />
                   <div className="absolute inset-0 bg-navy/60 rounded-2xl opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer backdrop-blur-sm">
                     <Upload className="text-white" size={24} />
                   </div>

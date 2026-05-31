@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
-  BrainCircuit, Mail, Lock, ArrowRight, 
+  Mail, Lock, ArrowRight, 
   Sparkles, CheckCircle2, ShieldCheck, Zap, Globe,
   Building2, Users, Target, BarChart2
 } from 'lucide-react';
@@ -33,9 +33,7 @@ const Login: React.FC = () => {
         <div className="w-full max-w-[420px] relative z-10">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 mb-10 group no-underline w-fit">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl flex items-center justify-center shadow-xl shadow-blue-500/30 transform group-hover:rotate-6 transition-transform">
-              <BrainCircuit size={28} className="text-white" />
-            </div>
+            <img src="/logo-konekta.png" alt="Konekta Logo" className="h-16 w-auto object-contain drop-shadow-xl scale-[1.3] transform group-hover:rotate-2 transition-transform" />
             <span className="font-extrabold text-2xl text-[#0B1120] tracking-tighter">Konekta</span>
           </Link>
 

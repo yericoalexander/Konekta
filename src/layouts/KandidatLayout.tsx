@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import {
   Home, User, BarChart2, Briefcase, Mail, BookOpen, Settings, LogOut,
-  BrainCircuit, TrendingUp, Mic
+  TrendingUp, Mic
 } from 'lucide-react';
 
 const sidebarItems = [
@@ -28,9 +28,7 @@ const KandidatLayout: React.FC = () => {
         {/* Logo Section */}
         <div className="p-10 flex items-center gap-4">
           <Link to="/" className="flex items-center gap-4 no-underline group">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl flex items-center justify-center shadow-xl shadow-blue-500/30 transform group-hover:rotate-6 transition-transform duration-300">
-              <BrainCircuit size={28} color="#fff" />
-            </div>
+            <img src="/logo-konekta.png" alt="Konekta Logo" className="h-16 w-auto object-contain drop-shadow-xl scale-[1.3] transform group-hover:rotate-2 transition-transform duration-300" />
             <div className="flex flex-col">
               <span className="font-extrabold text-2xl text-white tracking-tighter leading-none">Konekta</span>
               <span className="text-blue-400 text-[10px] font-black uppercase tracking-[3px] mt-1.5">Kandidat AI</span>
