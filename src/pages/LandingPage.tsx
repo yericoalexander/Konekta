@@ -74,7 +74,7 @@ const Hero = () => (
           <Link to="/assessment" className="px-10 py-5 bg-navy text-white rounded-[24px] text-sm font-extrabold shadow-2xl shadow-navy/20 hover:bg-blue-600 hover:-translate-y-1 transition-all active:translate-y-0 uppercase tracking-widest flex items-center justify-center gap-3">
             Mulai Tes Gratis <ArrowRight size={20} />
           </Link>
-          <Link to="/perusahaan/dashboard" className="px-10 py-5 bg-white border-2 border-slate-100 text-navy rounded-[24px] text-sm font-extrabold hover:border-navy hover:shadow-lg transition-all flex items-center justify-center gap-3 uppercase tracking-widest">
+          <Link to="/login" className="px-10 py-5 bg-white border-2 border-slate-100 text-navy rounded-[24px] text-sm font-extrabold hover:border-navy hover:shadow-lg transition-all flex items-center justify-center gap-3 uppercase tracking-widest">
             <Building size={20} /> Untuk Perusahaan
           </Link>
         </div>
@@ -203,7 +203,7 @@ const CaraKerjaKandidat = () => (
                </div>
                <div className="flex-1 text-center md:text-left">
                   <span className="text-[10px] font-black text-blue-400 uppercase tracking-[4px] mb-3 block">Step 07: Grow</span>
-                  <h4 className="text-2xl font-black mb-3">Terus Berkembang</h4>
+                  <h4 className="text-2xl font-black mb-3 text-white">Terus Berkembang</h4>
                   <p className="text-slate-400 font-medium">Dapatkan rekomendasi kursus gratis untuk menutup celah skill dan meningkatkan peluang karirmu secara real-time.</p>
                </div>
                <button className="px-10 py-5 bg-white text-navy rounded-2xl font-extrabold text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-xl whitespace-nowrap">Explore Academy</button>
@@ -403,22 +403,27 @@ const Footer = () => (
   <footer className="bg-[#0B1120] text-white pt-32 pb-12 overflow-hidden relative">
     <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px] -mr-32 -mb-32"></div>
     <div className="container mx-auto px-6 relative z-10">
-      <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 mb-24 justify-between">
+      <div className="flex flex-col md:flex-row gap-16 md:gap-24 mb-24 justify-between">
         
         {/* Left side: Logo & Info */}
-        <div className="lg:w-1/3 flex flex-col">
+        <div className="md:w-2/5 flex flex-col">
           <Link to="/" className="flex items-center gap-3 mb-8 group w-fit">
             <img src="/logo-konekta.png" alt="Konekta Logo" className="h-14 w-auto object-contain scale-[1.3] transform" />
             <span className="font-extrabold text-2xl tracking-tighter text-white">Konekta</span>
           </Link>
           <p className="text-slate-300 font-medium leading-relaxed mb-8 max-w-sm text-sm">Platform AI rekrutmen masa depan yang memprioritaskan skill nyata di atas segalanya.</p>
           <div className="flex gap-4">
-             {[1,2,3,4].map(i => <div key={i} className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-500 transition-colors cursor-pointer"></div>)}
+             {/* Decorative placeholder icons */}
+             {[Sparkles, Target, LineChart, Send].map((Icon, i) => (
+                <div key={i} className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-500 transition-colors cursor-pointer flex items-center justify-center text-slate-400 hover:text-white">
+                   <Icon size={18} />
+                </div>
+             ))}
           </div>
         </div>
         
         {/* Right side: Links Grid */}
-        <div className="lg:w-3/5 grid grid-cols-2 md:grid-cols-3 gap-10">
+        <div className="md:w-3/5 grid grid-cols-2 md:grid-cols-3 gap-10">
           {[
             { title: 'Kandidat', links: ['Cara Kerja', 'Assessment', 'Dashboard', 'Academy'] },
             { title: 'Perusahaan', links: ['Rekrutmen AI', 'Pricing', 'Enterprise', 'Mitra HR'] },
